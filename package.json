@@ -1,0 +1,27 @@
+{
+  "name": "famgram",
+  "version": "1.0.0",
+  "description": "for everyone web ",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lee-tae-eon/my-first-website.git"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
+  "author": "leetaeeon mktears0609@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lee-tae-eon/my-first-website/issues"
+  },
+  "homepage": "https://github.com/lee-tae-eon/my-first-website#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "nodemon": "^2.0.7"
+  }
+}
