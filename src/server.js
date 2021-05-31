@@ -9,6 +9,8 @@ const PORT = 4000;
 const app = express();
 const loogerMiddleware = morgan("dev");
 
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views");
 app.use(loogerMiddleware);
 
 app.use("/", globalRouter);

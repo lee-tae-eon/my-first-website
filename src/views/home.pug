@@ -1,0 +1,9 @@
+extends main/layout.pug
+
+block content 
+  h2 Welcome here you will see trending videos
+  ul
+    each picture in albums 
+      li=picture.title
+    else 
+      li Noting found
