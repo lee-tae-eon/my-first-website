@@ -11,6 +11,7 @@ const loogerMiddleware = morgan("dev");
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
+app.use(express.urlencoded({ extended: true }));
 app.use(loogerMiddleware);
 
 app.use("/", globalRouter);

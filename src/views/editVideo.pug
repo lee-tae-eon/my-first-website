@@ -1,5 +1,8 @@
 extends main/layout
 
 
-block content 
-  h1 Edit Album
+block content
+  h4 Change Title of Video
+    form(method="POST")
+      input(name="title", placeholder="video title", value=video.title, required)
+      input(value="save", type="submit")

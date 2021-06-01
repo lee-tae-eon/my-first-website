@@ -1,0 +1,7 @@
+extends main/layout
+include mixins/videos
+
+block content
+  h4 #{video.views} #{video.views === 1 ? "view" : "views"}
+  //- 상대경로 절대경로의 차이 (/root를 붙여주느냐 안붙여주느냐의 차이)
+  a(href=`${video.id}/edit`) Edit Video &larr;
