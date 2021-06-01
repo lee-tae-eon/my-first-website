@@ -1,9 +1,9 @@
-extends main/layout.pug
+extends main/layout
+include mixins/videos
 
 block content 
-  h2 Welcome here you will see trending videos
-  ul
-    each picture in albums 
-      li=picture.title
-    else 
-      li Noting found
+  h2 Welcome here you will see trending videos  
+  each video in videos
+    +video(video)
+  else 
+    li Nothing found
