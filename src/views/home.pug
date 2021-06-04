@@ -1,8 +1,7 @@
 extends main/layout
 include mixins/videos
 
-block content 
-  h2 Welcome here you will see trending videos  
+block content  
   each video in videos
     +video(video)
   else 

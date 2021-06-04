@@ -1,55 +1,28 @@
-let videos = [
-  {
-    title: "no.1 album",
-    rating: 5,
-    comments: 2,
-    createAt: "2minute",
-    views: 1,
-    id: 1,
-  },
-  {
-    title: "no.2 album",
-    rating: 5,
-    comments: 2,
-    createAt: "2minute",
-    views: 50,
-    id: 2,
-  },
-  {
-    title: "no.3 album",
-    rating: 5,
-    comments: 2,
-    createAt: "2minute",
-    views: 50,
-    id: 3,
-  },
-];
+import Video from "../models/Video";
 
-export const trending = (req, res) => {
+// Video.find({}, (error, videos) => {});
+export const home = async (req, res) => {
+  const videos = await Video.find({});
+
   return res.render("home", { pageTitle: "Home", videos });
 };
 
 export const watchVideo = (req, res) => {
   const { id } = req.params;
-  const video = videos[id - 1];
   return res.render("watchVideo", {
-    pageTitle: `Watching ${video.title}`,
-    video,
+    pageTitle: "Video",
   });
 };
 
 export const getEditVideo = (req, res) => {
   const { id } = req.params;
-  const video = videos[id - 1];
-
-  return res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+  return res.render("editVideo", { pageTitle: `Edit` });
 };
 
 export const postEditVideo = (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
 
-  videos[id - 1].title = title;
   return res.redirect(`/videos/${id}`);
 };
 
@@ -58,16 +31,19 @@ export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "upload video", pageUrl });
 };
 
-export const postUpload = (req, res) => {
-  const { title } = req.body;
-  const newVideo = {
-    title,
-    rating: 0,
-    comments: 0,
-    createAt: "1second ago",
-    views: 0,
-    id: videos.length + 1,
-  };
-  videos.push(newVideo);
-  return res.redirect("/");
+export const postUpload = async (req, res) => {
+  const { title, description, hashtags } = req.body;
+  try {
+    await Video.create({
+      title,
+      description,
+      hashtags: hashtags.split(",").map((word) => `#${word}`),
+    });
+    return res.redirect("/");
+  } catch (err) {
+    return res.render("upload", {
+      pageTitle: "Upload Video",
+      errorMessage: err._message,
+    });
+  }
 };
