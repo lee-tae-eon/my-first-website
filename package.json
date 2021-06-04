@@ -1,5 +1,5 @@
 {
-  "name": "famgram",
+  "name": "gyumtube",
   "version": "1.0.0",
   "description": "for everyone web ",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "git+https://github.com/lee-tae-eon/my-first-website.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "author": "leetaeeon mktears0609@gmail.com",
   "license": "MIT",
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/lee-tae-eon/my-first-website#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.12.12",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"
   },
