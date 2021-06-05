@@ -1,0 +1,18 @@
+extends main/layout
+include mixins/videos
+
+block content 
+  form(method="GET")
+    input(placeholder="Search", type="text", name="keyword")
+    input(type="submit", value="🔍 Search")
+  div
+    each video in videos
+      +video(video)
+    else
+      li No searching found
+
+  //- 태언 서치코드 완료후 이코드로
+  //- each video in videos
+  //-   +video(video)
+  //- else 
+  //-   li Nothing found

@@ -2,6 +2,10 @@ extends main/layout
 include mixins/videos
 
 block content
-  h4 #{video.views} #{video.views === 1 ? "view" : "views"}
+  div
+    p=video.description
+    small=video.createdAt 
   //- 상대경로 절대경로의 차이 (/root를 붙여주느냐 안붙여주느냐의 차이)
-  a(href=`${video.id}/edit`) Edit Video &larr;
+  a(href=`${video.id}/edit`) 비디오 수정 &larr;
+  br
+  a(href=`${video.id}/delete`) 비디오 삭제 &larr;

@@ -3,12 +3,20 @@ html(lang="ko")
   include ../partials/head
   body
     header
-      h1=pageTitle
-      if pageUrl !== "/videos/upload"
-        nav 
-          ul
+      h1=pageTitle     
+      nav 
+        ul
+          if pageUrl !== "/videos/upload"
             li
               a(href="/videos/upload") Upload Video
+          li 
+            a(href="/") Home
+          li
+            a(href="/search") Search
+            //- 태언 서치코드 - 완료후 이 코드로
+            //- form(method="GET" action="/search")
+            //-   input(placeholder="Search", type="text", name="keyword")
+            //-   input(type="submit", value="🔍 Search")
     main 
       block content
   include ../partials/footer

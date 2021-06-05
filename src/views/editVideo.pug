@@ -2,7 +2,9 @@ extends main/layout
 
 
 block content
-  h4 Change Title of Video
+  h4 Update Video
     form(method="POST")
-      input(name="title", placeholder="video title", value=video.title, required)
+      input(name="title", placeholder="video title", value=video.title, required, type="text", minlength=3)
+      textarea(name="description", maxlength=200, required, rows="7", cols="66"  )=video.description
+      input(name="hashtags", placeholder="Hashtags, separated by comma", required, type="text", value=video.hashtags.join())
       input(value="save", type="submit")
