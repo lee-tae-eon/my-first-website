@@ -3,7 +3,7 @@ html(lang="ko")
   include ../partials/head
   body
     header
-      h1=pageTitle     
+      h1=pageTitle 
       nav 
         ul
           if pageUrl !== "/videos/upload"
@@ -17,6 +17,18 @@ html(lang="ko")
             //- form(method="GET" action="/search")
             //-   input(placeholder="Search", type="text", name="keyword")
             //-   input(type="submit", value="🔍 Search")
+        ul
+          if loggedIn
+            li 
+              a(href="/logout") Log Out
+            li 
+              a(href="/user-profile") #{loggedInUser.firstname}'s Profile     
+          else  
+            li 
+              a(href="/join") Join Us 
+            li 
+              a(href="/login") Log In  
+          
     main 
       block content
   include ../partials/footer

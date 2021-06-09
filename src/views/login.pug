@@ -1,0 +1,13 @@
+extends main/layout
+
+block content
+  if errMsg 
+    h3=errMsg
+  form(method="POST") 
+    input(required, name="username", type="text", placeholder="Username") 
+    input(required, name="password", type="password", placeholder="Password")     
+    input(type="submit", value="Log In") 
+  hr
+  div 
+    span Don't have an account?
+    a(href="/join") &nbsp; Create one now &larr;

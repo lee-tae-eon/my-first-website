@@ -1,0 +1,18 @@
+extends main/layout
+
+block content
+  if errMsg
+    h3=errMsg
+  form(method="POST")
+    input(required, name="firstname", type="text", placeholder="First Name", minlength=1, maxlength=20)
+    input(required, name="lastname", type="text", placeholder="Last Name", minlength=3, maxlength=30)
+    input(required, name="email", type="email", placeholder="Email") 
+    input(required, name="username", type="text", placeholder="Username") 
+    input(required, name="password1", type="password", placeholder="Password") 
+    input(required, name="password2",type="password", placeholder="Confirm Password") 
+    input(required, nmae="location", type="address", placeholder="your location")
+    input(type="submit", value="Join submit") 
+  hr
+  div 
+    span Already have an account?
+    a(href="/login") &nbsp; Log In Now &larr;

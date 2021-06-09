@@ -1,4 +1,5 @@
 import "./db";
+import User from "./models/User";
 import Video from "./models/Video";
 import app from "./server";
 
