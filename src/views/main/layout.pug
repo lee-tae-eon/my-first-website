@@ -6,7 +6,7 @@ html(lang="ko")
       h1=pageTitle 
       nav 
         ul
-          if pageUrl !== "/videos/upload"
+          if loggedIn
             li
               a(href="/videos/upload") Upload Video
           li 
@@ -23,6 +23,8 @@ html(lang="ko")
               a(href="/users/logout") Log Out
             li 
               a(href="/user-profile") #{loggedInUser.name}'s Profile     
+            li 
+              a(href="/users/edit") Edit Profile
           else  
             li 
               a(href="/join") Join Us 

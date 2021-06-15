@@ -4,7 +4,7 @@ block content
   if errMsg 
     h3=errMsg
   form(method="POST") 
-    input(required, name="username", type="text", placeholder="Username") 
+    input(required, name="username", type="text", placeholder="Username", minlength=3, maxlength=30) 
     input(required, name="password", type="password", placeholder="Password")     
     input(type="submit", value="Log In") 
     br
