@@ -4,8 +4,10 @@ block content
   if errMsg 
     h3=errMsg
   form(method="POST") 
-    input(required, name="username", type="text", placeholder="Username", minlength=3, maxlength=30) 
-    input(required, name="password", type="password", placeholder="Password")     
+    label(for="login-username") User Name
+    input(required, name="username", type="text", id="login-username", placeholder="Username", minlength=3, maxlength=30) 
+    label(for="login-password") Password
+    input(required, name="password", type="password", id="login-password", placeholder="Password")     
     input(type="submit", value="Log In") 
     br
     a(href="/users/github/start") Sign with Github &larr;

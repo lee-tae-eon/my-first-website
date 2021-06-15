@@ -4,12 +4,18 @@ block content
   if errMsg
     h3=errMsg
   form(method="POST")
-    input(required, name="name", type="text", placeholder="Name", minlength=3, maxlength=30)
-    input(required, name="email", type="email", placeholder="Email") 
-    input(required, name="username", type="text", placeholder="Username", minlength=3, maxlength=30) 
-    input(name="password1", type="password", placeholder="Password") 
-    input(name="password2",type="password", placeholder="Confirm Password") 
-    input(required, nmae="location", type="address", placeholder="your location")
+    label(for="join-name") Name  
+    input(required, name="name", type="text", id="join-name",placeholder="Name", minlength=3, maxlength=30)
+    label(for="join-email") Email
+    input(required, name="email", type="email", id="join-email",placeholder="Email") 
+    label(for="join-username") User Name
+    input(required, name="username", type="text", id="join-username",placeholder="Username", minlength=3, maxlength=30) 
+    label(for="join-pwd") Password
+    input(name="password1", type="password", id="join-pwd",placeholder="Password") 
+    label(for="join-confirm-pwd") Confirm Password
+    input(name="password2",type="password", id="join-confirm-pwd",placeholder="Confirm Password") 
+    label(for="join-address") Address
+    input(required, name="location", type="address", id="join-address",placeholder="your location")
     input(type="submit", value="Join submit") 
   hr
   div 
