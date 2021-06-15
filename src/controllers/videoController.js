@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+const fs = require("fs");
 
 // Video.find({}, (error, videos) => {});
 export const home = async (req, res) => {
@@ -52,11 +53,16 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = async (req, res) => {
-  const { title, description, hashtags } = req.body;
+  const {
+    file: { path: fileUrl },
+    body: { title, description, hashtags },
+  } = req;
+
   try {
     await Video.create({
       title,
       description,
+      fileUrl,
       hashtags: Video.formatHashtags(hashtags),
     });
     return res.redirect("/");
@@ -70,7 +76,17 @@ export const postUpload = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const { id } = req.params;
+  const filePath = await Video.findOne(
+    { _id: id },
+    { _id: false, fileUrl: true }
+  );
+
   await Video.findByIdAndDelete(id);
+  await fs.unlink(filePath.fileUrl, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
   return res.redirect("/");
 };
 

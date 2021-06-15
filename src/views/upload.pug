@@ -3,8 +3,13 @@ extends main/layout
 block content 
   if errorMessage 
     span=errorMessage
-  form(method="POST")
-    input(name="title", placeholder="title", required, type="text", minLength=3, maxLength=80 )
-    textarea(name="description", placeholder="description", required, type="text", maxLength=200 )
-    input(name="hashtags", placeholder="Hashtags, separated by comma", required, type="text")
+  form(method="POST", enctype="multipart/form-data")
+    label(for="video-file") Video File
+    input(name="video-file", type="file", accept="video/*", required, id="video-file")
+    label(for="upload-title") Video Title
+    input(name="title", type="text", placeholder="title", required, id="upload-title"  minLength=3, maxLength=80 )
+    label(for="upload-text") Video Description 
+    textarea(name="description", type="text",placeholder="description", required, id="upload-text",  maxLength=200 )
+    label(for="upload-hash") Video Hashtags
+    input(name="hashtags", type="text", placeholder="Hashtags, separated by comma", required, id="upload-hash")
     input(type="submit", value="Upload Video")

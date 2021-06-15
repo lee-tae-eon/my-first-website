@@ -30,6 +30,7 @@ app.use(
 );
 app.use(localsMiddleWare);
 
+app.use("/uploads", express.static("uploads/"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
