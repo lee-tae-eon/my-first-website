@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import User from "../models/User";
 import bcrypt from "bcrypt";
+const fs = require("fs");
 
 // 회원가입 -------
 export const getJoin = (req, res) => res.render("Join", { pageTitle: "Join" });
@@ -155,11 +156,13 @@ export const getEditUser = (req, res) => {
 export const postEditUser = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
-    body: { avatar, name, email, username, location },
+    body: { name, email, username, location },
+    file,
   } = req;
-
+  console.log("file : ", file);
+  console.log("ava  : ", avatarUrl);
   const existUsername = await User.findOne({ username });
   const existEmail = await User.findOne({ email });
 
@@ -172,18 +175,61 @@ export const postEditUser = async (req, res) => {
       errMsg: "This username or email is aleady taken",
     });
   }
+  let updatedUser;
 
-  const updatedUser = await User.findByIdAndUpdate(
-    _id,
-    {
-      name,
-      email,
-      username,
-      location,
-      avatarUrl: avatar,
-    },
-    { new: true }
-  );
+  // const updatedUser = await User.findByIdAndUpdate(
+  //   _id,
+  //   {
+  //     avatarUrl: file
+  //       ? avatarUrl
+  //         ? await fs.unlink(String(avatarUrl), (err, file) => {
+  //             if (err) {
+  //               console.log(err);
+  //             } else {
+  //               return file.path;
+  //             }
+  //           })
+  //         : file.path
+  //       : avatarUrl,
+  //     name,
+  //     email,
+  //     username,
+  //     location,
+  //   },
+  //   { new: true }
+  // );
+
+  if (!file) {
+    updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        avatarUrl: avatarUrl,
+        name,
+        email,
+        username,
+        location,
+      },
+      { new: true }
+    );
+  } else {
+    await fs.unlink(String(avatarUrl), (err) => {
+      if (err) {
+        return console.log(err);
+      }
+    });
+    updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        avatarUrl: file.path,
+        name,
+        email,
+        username,
+        location,
+      },
+      { new: true }
+    );
+  }
+
   req.session.user = updatedUser;
   return res.redirect("/users/edit");
 };
