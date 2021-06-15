@@ -44,9 +44,10 @@ export const getLogin = (req, res) => {
 
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
+
   const pageTitle = "Log In";
 
-  const loggingUser = await User.findOne({ username, socialOnly: false });
+  const loggingUser = await User.findOne({ username, socialLogin: false });
   if (!loggingUser) {
     return res.status(400).render("login", {
       pageTitle,
@@ -147,8 +148,88 @@ export const logout = (req, res) => {
 };
 // --- user
 
-export const userProfile = (req, res) => res.send("Profile");
+export const getEditUser = (req, res) => {
+  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+};
 
-export const editUser = (req, res) => res.send("Edit User");
+export const postEditUser = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { avatar, name, email, username, location },
+  } = req;
+
+  const existUsername = await User.findOne({ username });
+  const existEmail = await User.findOne({ email });
+
+  if (
+    (existUsername && existUsername._id.toString() !== _id) ||
+    (existEmail && existEmail._id.toString() !== _id)
+  ) {
+    return res.status(400).render("edit-profile", {
+      pageTitle: "Edit Profile",
+      errMsg: "This username or email is aleady taken",
+    });
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+      avatarUrl: avatar,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit");
+};
+
+export const getChangePwd = (req, res) => {
+  const {
+    session: {
+      user: { socialLogin },
+    },
+  } = req;
+  if (socialLogin) {
+    return res.redirect("/");
+  }
+
+  return res.render("users/change-pwd", { pageTitle: "Change Password" });
+};
+
+export const postChangePwd = async (req, res) => {
+  const pageTitle = "Change Password";
+  const {
+    session: {
+      user: { _id, password },
+    },
+    body: { currPwd, newPwd, newPwdConfirm },
+  } = req;
+  const comparePwd = await bcrypt.compare(currPwd, password);
+
+  if (!comparePwd) {
+    return res.status(400).render("users/change-pwd", {
+      pageTitle,
+      errMsg: "The current password is incorrect",
+    });
+  }
+
+  if (newPwd !== newPwdConfirm) {
+    return res.status(400).render("users/change-pwd", {
+      pageTitle,
+      errMsg: "The password does not match",
+    });
+  }
+  const user = await User.findById(_id);
+  user.password = newPwd;
+  await user.save();
+  req.session.user.password = user.password;
+
+  return res.redirect("/");
+};
 
 export const deleteUser = (req, res) => res.send("delete page");

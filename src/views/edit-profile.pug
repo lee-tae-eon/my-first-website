@@ -1,0 +1,15 @@
+extends main/layout
+
+block content 
+  if errMsg 
+    h3=errMsg
+  form(method="POST")
+    input(name="avatar", value=loggedInUser.avatarUrl)
+    input(required, name="email", placeholder="email", type="email", value=loggedInUser.email)
+    input(required, name="name", placeholder="name", type="text", minlength=3, maxlength=30, value=loggedInUser.name)
+    input(required,name="username", placeholder="username", type="text", minlength=3, maxlength=30, value=loggedInUser.username)
+    input(required, name="location", placeholder="location", type="text", value=loggedInUser.location)
+    input(type="submit", value="Update Profile")
+    if !loggedInUser.socialLogin
+      hr
+      a(href="change-password") Change Password &larr;

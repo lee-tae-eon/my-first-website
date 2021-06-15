@@ -1,0 +1,10 @@
+extends ../main/layout
+
+block content
+  if errMsg 
+    h3=errMsg
+  form(method="POST")
+    input(required ,name="currPwd", placeholder="current password", type="password")
+    input(required ,name="newPwd", placeholder="new password", type="password")
+    input(required ,name="newPwdConfirm", placeholder="confirm password", type="password")
+    input(type="submit", value="Update password")
