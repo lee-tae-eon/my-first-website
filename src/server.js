@@ -8,6 +8,9 @@ import videoRouter from "./routers/videoRouter";
 
 const app = express();
 
+let milliseconds = 1000;
+let millisecToMinute = 60000;
+
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(loggerMiddleWare);
@@ -18,7 +21,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 20000,
+      maxAge: millisecToMinute * 30,
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
