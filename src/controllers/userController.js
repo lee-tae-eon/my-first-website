@@ -46,7 +46,7 @@ export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = "Log In";
 
-  const loggingUser = await User.findOne({ username });
+  const loggingUser = await User.findOne({ username, socialOnly: false });
   if (!loggingUser) {
     return res.status(400).render("login", {
       pageTitle,
@@ -107,7 +107,6 @@ export const finishGithub = async (req, res) => {
         },
       })
     ).json();
-    // console.log(userData);
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -119,37 +118,31 @@ export const finishGithub = async (req, res) => {
       (email) => email.primary === true && email.verified === true
     );
     if (!emailObj) {
+      // set notification
       return res.redirect("/login");
     }
-    const existingUser = await User.findOne({ email: emailObj.email });
-    if (existingUser) {
-      req.session.loggedIn = true;
-      req.session.user = existingUser;
-      return res.redirect("/");
-    } else {
-      try {
-        const user = await User.create({
-          name: userData.name,
-          username: userData.login,
-          email: emailObj.email,
-          password: "",
-          socialLogin: true,
-          location: userData.location,
-        });
-        req.session.loggedIn = true;
-        req.session.user = user;
-        return res.redirect("/");
-      } catch (err) {
-        console.log(err);
-      }
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
+      user = await User.create({
+        avatarUrl: userData.avatar_url,
+        name: userData.name,
+        username: userData.login,
+        email: emailObj.email,
+        password: "",
+        socialLogin: true,
+        location: userData.location,
+      });
     }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
   } else {
     return res.redirect("/login");
   }
 };
 
 export const logout = (req, res) => {
-  req.session.loggedIn = false;
+  req.session.destroy();
   return res.redirect("/");
 };
 // --- user

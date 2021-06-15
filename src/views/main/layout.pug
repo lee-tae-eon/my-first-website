@@ -20,7 +20,7 @@ html(lang="ko")
         ul
           if loggedIn
             li 
-              a(href="/logout") Log Out
+              a(href="/users/logout") Log Out
             li 
               a(href="/user-profile") #{loggedInUser.name}'s Profile     
           else  
