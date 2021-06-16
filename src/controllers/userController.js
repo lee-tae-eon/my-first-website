@@ -278,4 +278,22 @@ export const postChangePwd = async (req, res) => {
   return res.redirect("/");
 };
 
+export const userProfile = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  const user = await User.findById(id);
+  if (!user) {
+    return res
+      .status(404)
+      .render("404", { pageTitle: "유저 정보가 없습니다." });
+  }
+
+  res.render("users/user-profile", {
+    pageTitle: `${user.name}의 프로필`,
+    user,
+  });
+};
+
 export const deleteUser = (req, res) => res.send("delete page");
