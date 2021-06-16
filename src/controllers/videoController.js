@@ -14,7 +14,7 @@ export const watchVideo = async (req, res) => {
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
-  return res.render("watchVideo", {
+  return res.render("videos/watchVideo", {
     pageTitle: video.title,
     video,
   });
@@ -27,7 +27,10 @@ export const getEditVideo = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
-  return res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+  return res.render("videos/editVideo", {
+    pageTitle: `Edit ${video.title}`,
+    video,
+  });
 };
 
 export const postEditVideo = async (req, res) => {
@@ -49,7 +52,7 @@ export const postEditVideo = async (req, res) => {
 
 export const getUpload = (req, res) => {
   const pageUrl = req.originalUrl;
-  return res.render("upload", { pageTitle: "upload video", pageUrl });
+  return res.render("videos/upload", { pageTitle: "upload video", pageUrl });
 };
 
 export const postUpload = async (req, res) => {
@@ -67,7 +70,7 @@ export const postUpload = async (req, res) => {
     });
     return res.redirect("/");
   } catch (err) {
-    return res.status(400).render("upload", {
+    return res.status(400).render("videos/upload", {
       pageTitle: "Upload Video",
       errorMessage: err._message,
     });
@@ -105,5 +108,5 @@ export const search = async (req, res) => {
   //   $or: [{ title: { $regex: new RegExp(keyword, "i") } }, { description: { $regex: new RegExp(keyword, "i") } }],
   // });
 
-  return res.render("search", { pageTitle: "Search", videos });
+  return res.render("videos/search", { pageTitle: "Search", videos });
 };

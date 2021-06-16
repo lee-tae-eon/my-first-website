@@ -150,7 +150,7 @@ export const logout = (req, res) => {
 // --- user
 
 export const getEditUser = (req, res) => {
-  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+  return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 };
 
 export const postEditUser = async (req, res) => {
@@ -170,7 +170,7 @@ export const postEditUser = async (req, res) => {
     (existUsername && existUsername._id.toString() !== _id) ||
     (existEmail && existEmail._id.toString() !== _id)
   ) {
-    return res.status(400).render("edit-profile", {
+    return res.status(400).render("users/edit-profile", {
       pageTitle: "Edit Profile",
       errMsg: "This username or email is aleady taken",
     });
