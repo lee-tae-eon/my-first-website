@@ -1,12 +1,15 @@
 extends ../main/layout
 
 block content 
-  img(src="/" + loggedInUser.avatarUrl, width="100", height="100")
+  if loggedInUser.socialLogin === true
+    img(src=loggedInUser.avatarUrl, width="100", height="100")
+  else
+    img(src="/" + loggedInUser.avatarUrl, width="100", height="100")
   if errMsg 
     h3=errMsg
   form(method="POST", , enctype="multipart/form-data")
     label(for="edit-avatar") Profile Image
-    input(name="avatar", type="file", id="edit-avatar", value=loggedInUser.avatarUrl, accept="image/*")
+    input(name="avatar", type="file", id="edit-avatar", accept="image/*")
     label(for="edit-email") Email
     input(required, name="email", placeholder="email", type="email", id="edit-email", value=loggedInUser.email)
     label(for="edit-name") Name
