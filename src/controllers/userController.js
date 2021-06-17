@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import User from "../models/User";
 import bcrypt from "bcrypt";
+import Video from "../models/Video";
 const fs = require("fs");
 
 // 회원가입 -------
@@ -283,7 +284,8 @@ export const userProfile = async (req, res) => {
     params: { id },
   } = req;
 
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("videos");
+  console.log(user);
   if (!user) {
     return res
       .status(404)

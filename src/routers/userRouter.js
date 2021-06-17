@@ -8,6 +8,7 @@ import {
   postEditUser,
   getChangePwd,
   postChangePwd,
+  userProfile,
 } from "../controllers/userController";
 import {
   avatarUploadMiddleWare,
@@ -31,5 +32,6 @@ userRouter
 userRouter.get("/delete", deleteUser);
 userRouter.get("/github/start", publicOnlyMiddleWare, loginGithub);
 userRouter.get("/github/finish", publicOnlyMiddleWare, finishGithub);
+userRouter.get("/:id", userProfile);
 
 export default userRouter;

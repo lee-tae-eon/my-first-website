@@ -1,0 +1,11 @@
+extends ../main/layout
+include ../mixins/videos
+
+block content
+  if user.videos
+    each video in user.videos 
+      +video(video)
+    else  
+      li Sorry not found
+  else 
+    li Video not Found

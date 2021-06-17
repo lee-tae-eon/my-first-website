@@ -15,11 +15,14 @@ const userSchema = mongoose.Schema({
   name: { type: String, required: true },
   location: String,
   joinDate: { type: Date, default: Date.now(), requried: true },
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
 });
 
 // hashing password with middleware
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 5);
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 5);
+  }
 });
 
 const User = mongoose.model("User", userSchema);
