@@ -2,10 +2,18 @@ extends ../main/layout
 include ../mixins/videos
 
 block content
+  div.profile__data
+    if loggedInUser.socialLogin === true
+      img(src=user.avatarUrl).avatar
+      h3=user.name
+    else 
+      img(src="/" + user.avatarUrl).avatar
+      h3=user.name
   if user.videos
-    each video in user.videos 
-      +video(video)
-    else  
-      li Sorry not found
+    div.video-grid
+      each video in user.videos 
+        +video(video)
+      else  
+        li Sorry not found
   else 
-    li Video not Found
+    span.empty__message No videos found

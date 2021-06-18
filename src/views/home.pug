@@ -1,8 +1,9 @@
-extends main/layout
-include mixins/videos
+extends ./main/layout
+include ./mixins/videos
 
-block content  
-  each video in videos
-    +video(video)
-  else 
-    li Nothing found
+block content
+  div.video-grid 
+    each video in videos
+      +video(video)
+    else 
+      span.empty__msg 비디오를 찾지 못했습니다.

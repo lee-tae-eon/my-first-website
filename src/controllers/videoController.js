@@ -4,7 +4,9 @@ const fs = require("fs");
 
 // Video.find({}, (error, videos) => {});
 export const home = async (req, res) => {
-  const videos = await Video.find({}).sort({ createdAt: "desc" });
+  const videos = await Video.find({})
+    .sort({ createdAt: "desc" })
+    .populate("owner");
 
   return res.render("home", { pageTitle: "Home", videos });
 };
@@ -140,7 +142,7 @@ export const search = async (req, res) => {
       title: {
         $regex: new RegExp(keyword, "i"),
       },
-    });
+    }).populate("owner");
   }
   // 태언 서치코드 완료후 이코드로
   // const videos = await Video.find({

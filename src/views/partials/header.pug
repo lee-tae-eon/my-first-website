@@ -1,0 +1,32 @@
+header
+  a(href="/").header__logo
+    i.fab.fa-youtube  
+  nav 
+    ul
+      li
+        a(href="/search") Search 
+          i.fas.fa-search
+        //- 태언 서치코드 - 완료후 이 코드로
+        //- form(method="GET" action="/search")
+        //-   input(placeholder="Search", type="text", name="keyword")
+        //-   input(type="submit", value="🔍 Search")
+    ul
+      if loggedIn
+        li
+          a(href="/videos/upload") 업로드
+        li 
+          a(href="/users/edit") 프로필 수정
+        li 
+          a(href="/users/logout") 로그아웃
+        li.header-profile 
+          a(href=`/users/${loggedInUser._id}`)
+            if loggedInUser.avatarUrl === ""
+              span 🤪  #{loggedInUser.name}님의 프로필  
+            else 
+              img(src=loggedInUser.avatarUrl).header__avatar  
+              span #{loggedInUser.name}님의 프로필
+      else  
+        li 
+          a(href="/login") 로그인
+        li 
+          a(href="/join").header__btn 회원가입

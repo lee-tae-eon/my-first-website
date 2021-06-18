@@ -1,37 +1,13 @@
 doctype html 
 html(lang="ko")
-  include ../partials/head
+  head  
+    title #{pageTitle} | #{siteName}
+    link(rel="shortcut icon" href="data:;base64,iVBORw0KGgo=")
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css")
+    link(rel="stylesheet" href="/static/css/styles.css")
   body
-    header
-      h1=pageTitle 
-      nav 
-        ul
-            
-          li 
-            a(href="/") Home
-          li
-            a(href="/search") Search
-            //- 태언 서치코드 - 완료후 이 코드로
-            //- form(method="GET" action="/search")
-            //-   input(placeholder="Search", type="text", name="keyword")
-            //-   input(type="submit", value="🔍 Search")
-        ul
-          if loggedIn
-            li
-              a(href="/videos/upload") Upload Video
-            li 
-              a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}'s Profile     
-            li 
-              a(href="/users/edit") Edit Profile
-            li 
-              a(href="/users/logout") Log Out
-          else  
-            li 
-              a(href="/join") Join Us 
-            li 
-              a(href="/login") Log In  
-          
+    include ../partials/header          
     main 
       block content
-  include ../partials/footer
+    include ../partials/footer
   script(src="/static/js/main.js")

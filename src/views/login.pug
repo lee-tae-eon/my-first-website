@@ -9,9 +9,7 @@ block content
     label(for="login-password") Password
     input(required, name="password", type="password", id="login-password", placeholder="Password")     
     input(type="submit", value="Log In") 
-    br
-    a(href="/users/github/start") Sign with Github &larr;
-  hr
-  div 
+    include ./partials/social-login
+  div.auth-switch 
     span Don't have an account?
     a(href="/join") &nbsp; Create one now &larr;
