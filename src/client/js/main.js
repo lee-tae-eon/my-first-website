@@ -1,8 +1,3 @@
-import fetch from "node-fetch";
+import "../scss/styles.scss";
 
-const hello = () => {
-  alert("hi! its work");
-  const x = await fetch("");
-};
-
-hello();
+console.log("hi");
