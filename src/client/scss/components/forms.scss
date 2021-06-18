@@ -13,7 +13,7 @@ form {
     display: block;
   }
 }
-input,
+input:not(input[type="range"]),
 textarea {
   all: unset;
   width: 90%;

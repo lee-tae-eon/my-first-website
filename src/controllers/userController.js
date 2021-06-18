@@ -284,7 +284,13 @@ export const userProfile = async (req, res) => {
     params: { id },
   } = req;
 
-  const user = await User.findById(id).populate("videos");
+  const user = await User.findById(id).populate({
+    path: "videos",
+    populate: {
+      path: "owner",
+      model: "User",
+    },
+  });
   console.log(user);
   if (!user) {
     return res

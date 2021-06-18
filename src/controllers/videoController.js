@@ -31,7 +31,7 @@ export const getEditVideo = async (req, res) => {
     },
     params: { id },
   } = req;
-  const video = await Video.findById(id);
+  const video = await Video.findById(id).populate("owner");
 
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
@@ -55,7 +55,7 @@ export const postEditVideo = async (req, res) => {
     },
   } = req;
 
-  const video = await Video.exists({ _id: id });
+  const video = await Video.exists({ _id: id }).populate("owner");
 
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
@@ -118,7 +118,7 @@ export const deleteVideo = async (req, res) => {
     { _id: id },
     { _id: false, fileUrl: true }
   );
-  const video = await Video.findById(id);
+  const video = await Video.findById(id).populate("owner");
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not allow" });
   }
