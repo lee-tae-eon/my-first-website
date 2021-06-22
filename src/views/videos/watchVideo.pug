@@ -1,32 +1,48 @@
 extends ../main/layout
-include ../mixins/videos
 
 block content
-  div#videoContainer
-    video(src="/" + video.fileUrl)
-    div#videoControls 
-      button#play Play 
-      button#mute Mute 
-      input(type="range",step="0.1", min="0", max="1", value=0.5)#volume
-      div
-        span#currentTime 00:00 
-        span | 
-        span#totalTime 00:00
-      div
-        input(type="range",step="1", min="0", value=0)#timeLine
-      div   
-        button#fullScreen Full Screen
-  //- div
-  //-   p=video.description
-  //-   small=video.createdAt 
-  //- div
-  //-   small Uploaded by 
-  //-     a(href=`/users/${video.owner.id}`)=video.owner.name
-  //- //- 상대경로 절대경로의 차이 (/root를 붙여주느냐 안붙여주느냐의 차이)
-  //- if String(video.owner._id) === String(loggedInUser._id)
-  //-   a(href=`${video.id}/edit`) 비디오 수정 &larr;
-  //-   br
-  //-   a(href=`${video.id}/delete`) 비디오 삭제 &larr;
+    div#videoContainer
+      video(src="/" + video.fileUrl)
+      span#jsScreenPlay
+      div#videoControls.videoControls
+          div.videoControls__play
+              span#play.videoControls__playBtn
+                  i.fas.fa-play
+              div.videoControls__time
+                  span#currenTime 00:00
+                  span  / 
+                  span#totalTime 00:00
+          input(type="range",step="1", value="0", min="0")#timeline.videoControls__timeline
+          div.videoControls__volume
+              input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
+              span#mute
+                  i.fas.fa-volume-up
+          div
+              span#fullScreen
+                  i.fas.fa-expand
 
-block scripts 
-  script(src="/static/js/videoPlayer.js")
+    div.video__data
+      p.video__title=video.title
+      small.video__owner Uploaded by 
+          a(href=`/users/${video.owner._id}`)=video.owner.name
+      small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+      if String(video.owner._id) === String(loggedInUser._id)
+          a(href=`${video.id}/edit`) Edit Video &rarr;
+          br
+          a(href=`${video.id}/delete`) Delete Video &rarr;
+    //- if loggedIn
+    //-     div.video__add-comments
+    //-         form.video__comment-form#commentForm
+    //-             textarea(cols="30", rows="10", placeholder="Write a nice commment...")
+    //-             button Add Comment
+    //- div.video__comments
+    //-     ul
+    //-         each comment in video.comments.reverse()
+    //-             li.video__comment(data-id=comment.id)
+    //-                 i.fas.fa-comment
+    //-                 span  #{comment.text}
+    //-                 span ❌
+block scripts
+    script(src="/static/js/videoPlayer.js")
+    if loggedIn
+        script(src="/static/js/commentSection.js") 
