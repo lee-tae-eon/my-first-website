@@ -5,6 +5,7 @@ import MongoStore from "connect-mongo";
 import userRouter from "./routers/userRouter";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: millisecToMinute * 30,
+      maxAge: millisecToMinute * 100,
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
@@ -35,5 +36,6 @@ app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
+app.use("/api", apiRouter);
 
 export default app;

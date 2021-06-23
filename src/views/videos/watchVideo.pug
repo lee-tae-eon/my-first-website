@@ -1,7 +1,7 @@
 extends ../main/layout
 
 block content
-    div#videoContainer
+    div#videoContainer(data-videoId=video._id)
       video(src="/" + video.fileUrl)
       span#jsScreenPlay
       div#videoControls.videoControls
