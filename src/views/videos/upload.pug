@@ -1,21 +1,24 @@
 extends ../main/layout
 
 block content 
-  div 
-    video#preview
-    button#startBtn Start Recording
-  if errorMessage 
-    span=errorMessage
-  form(method="POST", enctype="multipart/form-data")
-    label(for="video-file") Video File
-    input(name="video-file", type="file", accept="video/*", required, id="video-file")
-    label(for="upload-title") Video Title
-    input(name="title", type="text", placeholder="title", required, id="upload-title"  minLength=3, maxLength=80 )
-    label(for="upload-text") Video Description 
-    textarea(name="description", type="text",placeholder="description", required, id="upload-text",  maxLength=200 )
-    label(for="upload-hash") Video Hashtags
-    input(name="hashtags", type="text", placeholder="Hashtags, separated by comma", required, id="upload-hash")
-    input(type="submit", value="Upload Video")
+  div.upload__container
+    div.upload__video 
+      video#preview
+      button#actionBtn.social__btn Start Recording
+    if errorMessage 
+      span=errorMessage
+    form(method="POST", enctype="multipart/form-data")
+      label(for="videoFile") Video File
+      input(name="videoFile", type="file", accept="video/*", required, id="videoFile")
+      label(for="thumbFile") Thumbnail File
+      input(name="thumbFile", type="file", accept="image/*", required, id="thumbFile")
+      label(for="upload-title") Video Title
+      input(name="title", type="text", placeholder="title", required, id="upload-title"  minLength=3, maxLength=80 )
+      label(for="upload-text") Video Description 
+      textarea(name="description", type="text",placeholder="description", required, id="upload-text",  maxLength=200 )
+      label(for="upload-hash") Video Hashtags
+      input(name="hashtags", type="text", placeholder="Hashtags, separated by comma", required, id="upload-hash")
+      input(type="submit", value="Upload Video")
 
 block scripts 
   script(src="/static/js/recorder.js")

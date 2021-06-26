@@ -146,7 +146,7 @@ export const finishGithub = async (req, res) => {
 
 export const logout = (req, res) => {
   req.session.destroy();
-  return res.redirect("/");
+  return res.redirect("/login");
 };
 // --- user
 
@@ -162,8 +162,6 @@ export const postEditUser = async (req, res) => {
     body: { name, email, username, location },
     file,
   } = req;
-  console.log("file : ", file);
-  console.log("ava  : ", avatarUrl);
   const existUsername = await User.findOne({ username });
   const existEmail = await User.findOne({ email });
 
@@ -176,60 +174,18 @@ export const postEditUser = async (req, res) => {
       errMsg: "This username or email is aleady taken",
     });
   }
-  let updatedUser;
 
-  // const updatedUser = await User.findByIdAndUpdate(
-  //   _id,
-  //   {
-  //     avatarUrl: file
-  //       ? avatarUrl
-  //         ? await fs.unlink(String(avatarUrl), (err, file) => {
-  //             if (err) {
-  //               console.log(err);
-  //             } else {
-  //               return file.path;
-  //             }
-  //           })
-  //         : file.path
-  //       : avatarUrl,
-  //     name,
-  //     email,
-  //     username,
-  //     location,
-  //   },
-  //   { new: true }
-  // );
-
-  if (!file) {
-    updatedUser = await User.findByIdAndUpdate(
-      _id,
-      {
-        avatarUrl: avatarUrl,
-        name,
-        email,
-        username,
-        location,
-      },
-      { new: true }
-    );
-  } else {
-    await fs.unlink(String(avatarUrl), (err) => {
-      if (err) {
-        return console.log(err);
-      }
-    });
-    updatedUser = await User.findByIdAndUpdate(
-      _id,
-      {
-        avatarUrl: file.path,
-        name,
-        email,
-        username,
-        location,
-      },
-      { new: true }
-    );
-  }
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      avatarUrl: avatarUrl,
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
 
   req.session.user = updatedUser;
   return res.redirect("/users/edit");
@@ -282,26 +238,35 @@ export const postChangePwd = async (req, res) => {
 export const userProfile = async (req, res) => {
   const {
     params: { id },
-  } = req;
-
-  const user = await User.findById(id).populate({
-    path: "videos",
-    populate: {
-      path: "owner",
-      model: "User",
+    session: {
+      user: { _id },
     },
-  });
-  console.log(user);
-  if (!user) {
-    return res
-      .status(404)
-      .render("404", { pageTitle: "유저 정보가 없습니다." });
-  }
+  } = req;
+  console.log("param id : ", id);
+  console.log("session id : ", _id);
+  try {
+    const user = await User.findById(_id).populate({
+      path: "videos",
+      populate: {
+        path: "owner",
+        model: "User",
+      },
+    });
+    console.log("user : ", user);
+    if (!user) {
+      return res
+        .status(404)
+        .render("404", { pageTitle: "유저 정보가 없습니다." });
+    }
 
-  res.render("users/user-profile", {
-    pageTitle: `${user.name}의 프로필`,
-    user,
-  });
+    res.render("users/user-profile", {
+      pageTitle: `${user.name}의 프로필`,
+      user,
+    });
+  } catch (error) {
+    console.log("err : ", error);
+    return res.redirect("/");
+  }
 };
 
 export const deleteUser = (req, res) => res.send("delete page");

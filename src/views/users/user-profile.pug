@@ -3,7 +3,7 @@ include ../mixins/videos
 
 block content
   div.profile__data
-    if loggedInUser.socialLogin === true
+    if user.socialLogin === true
       img(src=user.avatarUrl).avatar
       h3=user.name
     else 

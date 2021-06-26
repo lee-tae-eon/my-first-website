@@ -1,16 +1,13 @@
 import express from "express";
-import { localsMiddleWare, loggerMiddleWare } from "./middleWares";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import userRouter from "./routers/userRouter";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import apiRouter from "./routers/apiRouter";
+import { localsMiddleWare, loggerMiddleWare } from "./middleWares";
 
 const app = express();
-
-let milliseconds = 1000;
-let millisecToMinute = 60000;
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
@@ -21,9 +18,6 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      maxAge: millisecToMinute * 100,
-    },
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
     }),
