@@ -2,6 +2,8 @@ const { default: fetch } = require("node-fetch");
 
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
+const textarea = form.querySelector("textarea");
+const submitBtn = form.querySelector("button");
 const commentLists = document.getElementById("commentList");
 const deleteBtns = commentLists.querySelectorAll("button");
 
@@ -49,7 +51,7 @@ const addComment = (text, newCommentId) => {
 
 const handleCommentSubmit = async (event) => {
   event.preventDefault();
-  const textarea = form.querySelector("textarea");
+
   const text = textarea.value;
   const videoId = videoContainer.dataset.id;
 
@@ -72,6 +74,17 @@ const handleCommentSubmit = async (event) => {
   }
 };
 
+const handleEnterKey = (event) => {
+  if (event.key === "Enter") {
+    if (!event.shiftKey) {
+      event.preventDefault();
+      submitBtn.click();
+    }
+  } else {
+    return;
+  }
+};
+
 const handleCommentDelete = async (event) => {
   console.log(event);
   if (confirm("Are you sure???") === true) {
@@ -90,6 +103,7 @@ const handleCommentDelete = async (event) => {
 
 if (form) {
   form.addEventListener("submit", handleCommentSubmit);
+  textarea.addEventListener("keydown", handleEnterKey);
 }
 
 for (const delBtn of deleteBtns) {

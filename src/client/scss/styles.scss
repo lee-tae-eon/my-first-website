@@ -10,6 +10,7 @@
 @import "./components/forms";
 @import "./components/social-login";
 @import "./components/video-player";
+@import "./components//video-aside";
 // screens
 @import "./screens/home";
 @import "./screens/search";
@@ -31,9 +32,11 @@ body {
 }
 
 main {
-  max-width: 1100px;
+  max-width: 1200px;
   width: 100%;
   margin: 50px auto;
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes goAway {

@@ -1,75 +1,133 @@
-.video__data {
-  margin-top: 50px;
+.main-video__section {
   display: flex;
-  flex-direction: column;
-  .video__title {
-    font-size: 37px;
-    margin-bottom: 20px;
-  }
-  .video__description {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  .video__createAt {
-    font-size: 12px;
-  }
-  .video__owner {
-    margin-bottom: 15px;
-    font-size: 14px;
-    a {
-      font-size: 16px;
-      font-weight: 800;
-      color: cornflowerblue;
-      text-decoration: underline;
+  justify-content: space-between;
+  .video__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    .video__data {
+      margin-top: 50px;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      // align-items: flex-start;
+      .video__title {
+        font-size: 37px;
+        margin-bottom: 20px;
+      }
+      .video__description {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      .video__createAt {
+        font-size: 12px;
+      }
+      .video__owner {
+        margin-bottom: 15px;
+        font-size: 14px;
+        a {
+          font-size: 16px;
+          font-weight: 800;
+          color: cornflowerblue;
+          text-decoration: underline;
+        }
+      }
+      .video__createdAt {
+        margin-bottom: 19px;
+      }
+    }
+    .video__add-comments {
+      margin-top: 20px;
+      width: 100%;
+      .video__comment-form {
+        position: relative;
+        button {
+          margin-top: 5px;
+          position: absolute;
+          right: 15px;
+          bottom: 5px;
+          padding: 3px 6px;
+          border: none;
+          border-radius: 6px;
+          background-color: #76708e;
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 10px;
+        }
+      }
+    }
+
+    .video__comments {
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 30px;
+      .video__comments-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        width: 100%;
+        .video__comment {
+          width: 100%;
+          border-radius: 10px;
+          background-color: white;
+          color: black;
+          padding: 10px 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .comment__content {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .comment__text {
+              width: 80%;
+              display: flex;
+              flex-wrap: wrap;
+              letter-spacing: 1px;
+              span {
+                margin-left: 10px;
+              }
+            }
+            .comment__date {
+              margin-right: 10px;
+              font-size: 9px;
+              color: rgba(0, 0, 0, 0.3);
+            }
+          }
+          .comment__delete {
+            button {
+              border: none;
+              background-color: inherit;
+              cursor: pointer;
+              color: red;
+              transition: all 0.4s linear foward;
+              &:hover {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
-.video__comments {
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 30px;
-  .video__comments-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+
+@media screen and (max-width: 700px) {
+  .main-video__section {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    .video__comment {
-      width: 100%;
-      border-radius: 10px;
-      background-color: white;
-      color: black;
-      padding: 10px 15px;
+    .video__section {
+      width: 95%;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .comment__content {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .comment__text {
-          width: 80%;
-          display: flex;
-          flex-wrap: wrap;
-          letter-spacing: 1px;
-          span {
-            margin-left: 10px;
-          }
-        }
-        .comment__date {
-          margin-right: 10px;
-          font-size: 9px;
-          color: rgba(0, 0, 0, 0.3);
-        }
-      }
-      .comment__delete {
-        button {
-          border: none;
-          background-color: inherit;
-          cursor: pointer;
-          color: red;
-        }
+      flex-direction: column;
+      margin: 0 auto;
+      margin-bottom: 50px;
+      .video__comments {
+        max-width: 420px;
       }
     }
   }

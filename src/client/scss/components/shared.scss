@@ -5,8 +5,8 @@
 }
 .video-grid {
   display: grid;
-  gap: 50px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5vw;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 0.5fr));
 }
 .auth-switch {
   text-align: center;

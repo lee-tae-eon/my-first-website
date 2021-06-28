@@ -13,16 +13,27 @@ export const home = async (req, res) => {
 };
 
 export const watchVideo = async (req, res) => {
-  const { id } = req.params;
+  const {
+    params: { id },
+  } = req;
   const video = await Video.findById(id).populate("owner").populate("comments");
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
-  console.log(video);
-
+  const videos = await Video.find({
+    title: {
+      $regex: new RegExp(video.title, "i"),
+    },
+    _id: { $ne: id },
+  }).populate("owner");
+  console.log(videos);
+  if (!videos) {
+    return res.send("no video");
+  }
   return res.render("videos/watchVideo", {
     pageTitle: video.title,
     video,
+    videos,
   });
 };
 
