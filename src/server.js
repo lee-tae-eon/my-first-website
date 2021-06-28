@@ -1,4 +1,5 @@
 import express from "express";
+import flash from "express-flash";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import userRouter from "./routers/userRouter";
@@ -13,6 +14,7 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(loggerMiddleWare);
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
@@ -23,6 +25,7 @@ app.use(
     }),
   })
 );
+app.use(flash());
 app.use(localsMiddleWare);
 
 app.use("/uploads", express.static("uploads"));

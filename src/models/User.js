@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema({
   location: String,
   joinDate: { type: Date, default: Date.now(), requried: true },
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 // hashing password with middleware

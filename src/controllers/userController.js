@@ -31,6 +31,7 @@ export const postJoin = async (req, res) => {
       password: password1,
       location,
     });
+    req.flash("success", "Join Success");
     return res.redirect("/login");
   } catch (error) {
     return res.status(404).render("join", {
@@ -146,7 +147,7 @@ export const finishGithub = async (req, res) => {
 
 export const logout = (req, res) => {
   req.session.destroy();
-  return res.redirect("/login");
+  return res.redirect("/");
 };
 // --- user
 
@@ -178,7 +179,7 @@ export const postEditUser = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: avatarUrl,
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       email,
       username,
@@ -198,6 +199,7 @@ export const getChangePwd = (req, res) => {
     },
   } = req;
   if (socialLogin) {
+    req.flash("error", "Can't change password");
     return res.redirect("/");
   }
 
@@ -230,8 +232,8 @@ export const postChangePwd = async (req, res) => {
   const user = await User.findById(_id);
   user.password = newPwd;
   await user.save();
-  req.session.user.password = user.password;
-
+  // req.session.user.password = user.password;
+  req.flash("info", "Password Updated");
   return res.redirect("/");
 };
 
@@ -242,10 +244,8 @@ export const userProfile = async (req, res) => {
       user: { _id },
     },
   } = req;
-  console.log("param id : ", id);
-  console.log("session id : ", _id);
   try {
-    const user = await User.findById(_id).populate({
+    const user = await User.findById(id).populate({
       path: "videos",
       populate: {
         path: "owner",
@@ -268,5 +268,3 @@ export const userProfile = async (req, res) => {
     return res.redirect("/");
   }
 };
-
-export const deleteUser = (req, res) => res.send("delete page");

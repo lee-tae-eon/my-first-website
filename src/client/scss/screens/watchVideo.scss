@@ -1,0 +1,76 @@
+.video__data {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  .video__title {
+    font-size: 37px;
+    margin-bottom: 20px;
+  }
+  .video__description {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .video__createAt {
+    font-size: 12px;
+  }
+  .video__owner {
+    margin-bottom: 15px;
+    font-size: 14px;
+    a {
+      font-size: 16px;
+      font-weight: 800;
+      color: cornflowerblue;
+      text-decoration: underline;
+    }
+  }
+}
+.video__comments {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30px;
+  .video__comments-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+    .video__comment {
+      width: 100%;
+      border-radius: 10px;
+      background-color: white;
+      color: black;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .comment__content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .comment__text {
+          width: 80%;
+          display: flex;
+          flex-wrap: wrap;
+          letter-spacing: 1px;
+          span {
+            margin-left: 10px;
+          }
+        }
+        .comment__date {
+          margin-right: 10px;
+          font-size: 9px;
+          color: rgba(0, 0, 0, 0.3);
+        }
+      }
+      .comment__delete {
+        button {
+          border: none;
+          background-color: inherit;
+          cursor: pointer;
+          color: red;
+        }
+      }
+    }
+  }
+}

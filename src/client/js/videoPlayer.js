@@ -148,7 +148,7 @@ const handleMouseLeave = () => {
 
 const handleEnded = () => {
   const {
-    dataset: { videoid: id },
+    dataset: { id },
   } = videoContainer;
   console.log(id);
   fetch(`/api/videos/${id}/view`, {

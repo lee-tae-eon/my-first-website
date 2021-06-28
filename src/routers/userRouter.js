@@ -29,7 +29,6 @@ userRouter
   .all(protectMiddleWare)
   .get(getChangePwd)
   .post(postChangePwd);
-userRouter.get("/delete", deleteUser);
 userRouter.get("/github/start", publicOnlyMiddleWare, loginGithub);
 userRouter.get("/github/finish", publicOnlyMiddleWare, finishGithub);
 userRouter.get("/:id", userProfile);

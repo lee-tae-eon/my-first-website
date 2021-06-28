@@ -16,6 +16,7 @@ export const protectMiddleWare = (req, res, next) => {
   if (req.session.loggedIn) {
     return next();
   } else {
+    req.flash("error", "Not authorized");
     return res.redirect("/login");
   }
 };
@@ -24,6 +25,7 @@ export const publicOnlyMiddleWare = (req, res, next) => {
   if (!req.session.loggedIn) {
     return next();
   } else {
+    req.flash("error", "Not authorized");
     return res.redirect("/");
   }
 };
@@ -31,7 +33,7 @@ export const publicOnlyMiddleWare = (req, res, next) => {
 export const avatarUploadMiddleWare = multer({
   dest: "uploads/avatars/",
   limits: {
-    fileSize: megaByte * 5,
+    fileSize: megaByte * 10,
   },
 });
 
