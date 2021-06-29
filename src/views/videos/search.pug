@@ -6,7 +6,7 @@ block content
     input(placeholder="Search", type="text", name="keyword")
     button
       i.fas.fa-search
-  div.video-grid
+  div.video-grid#videoGrid
     each video in videos
       +video(video)
     else

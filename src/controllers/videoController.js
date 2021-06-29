@@ -26,7 +26,7 @@ export const watchVideo = async (req, res) => {
     },
     _id: { $ne: id },
   }).populate("owner");
-  console.log(videos);
+
   if (!videos) {
     return res.send("no video");
   }
@@ -45,7 +45,7 @@ export const getEditVideo = async (req, res) => {
     params: { id },
   } = req;
   const video = await Video.findById(id);
-  console.log(video);
+
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }

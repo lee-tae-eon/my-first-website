@@ -7,8 +7,12 @@
     "url": "git+https://github.com/lee-tae-eon/my-first-website.git"
   },
   "scripts": {
+    "start": "node build/init.js",
+    "build": "npm run build:server && npm run build:assets",
+    "build:assets": "webpack --mode=production",
+    "build:server": "babel src -d build",
     "dev:server": "nodemon",
-    "dev:assets": "webpack"
+    "dev:assets": "webpack --mode=development -w"
   },
   "author": "leetaeeon mktears0609@gmail.com",
   "license": "MIT",
@@ -34,6 +38,7 @@
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
+    "@babel/cli": "^7.14.5",
     "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",

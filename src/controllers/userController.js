@@ -252,7 +252,7 @@ export const userProfile = async (req, res) => {
         model: "User",
       },
     });
-    console.log("user : ", user);
+
     if (!user) {
       return res
         .status(404)
