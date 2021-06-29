@@ -1,7 +1,22 @@
 import morgan from "morgan";
 import multer from "multer";
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
 
 const megaByte = 1000000;
+
+const s3 = new aws.S3({
+  credentials: {
+    accessKeyId: process.env.AWS_ID,
+    secretAccessKey: process.env.AWS_SECRET,
+  },
+});
+
+const multerS3Uploader = multerS3({
+  s3: s3,
+  bucket: "gyumtube",
+  acl: "public-read",
+});
 
 export const loggerMiddleWare = morgan("dev");
 
@@ -35,6 +50,7 @@ export const avatarUploadMiddleWare = multer({
   limits: {
     fileSize: megaByte * 10,
   },
+  storage: multerS3Uploader,
 });
 
 export const videoUploadMiddleWare = multer({
@@ -42,4 +58,5 @@ export const videoUploadMiddleWare = multer({
   limits: {
     fileSize: megaByte * 30,
   },
+  storage: multerS3Uploader,
 });

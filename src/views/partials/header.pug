@@ -20,13 +20,13 @@ header
           a(href="/users/logout") 로그아웃
         li.header-profile 
           a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl === ""
+            if loggedInUser.avatarUrl === null
               span 🤪  #{loggedInUser.name}님의 프로필  
             else 
-              if loggedInUser.avatarUrl.includes("github")
+              if loggedInUser.socialLogin
                 img(src=loggedInUser.avatarUrl).header__avatar
               else
-                img(src=`/${loggedInUser.avatarUrl}`).header__avatar 
+                img(src=loggedInUser.avatarUrl).header__avatar 
               span #{loggedInUser.name}님의 프로필
       else  
         li 

@@ -103,8 +103,8 @@ export const postUpload = async (req, res) => {
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl: videoFile[0].path,
-      thumbUrl: thumbFile[0].path,
+      fileUrl: videoFile[0].location,
+      thumbUrl: thumbFile[0].location,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
@@ -128,10 +128,7 @@ export const deleteVideo = async (req, res) => {
       user: { _id },
     },
   } = req;
-  const filePath = await Video.findOne(
-    { _id: id },
-    { _id: false, fileUrl: true }
-  );
+
   const video = await Video.findById(id).populate("User");
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not allow" });
