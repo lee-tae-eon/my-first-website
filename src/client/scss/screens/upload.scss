@@ -1,6 +1,10 @@
 .upload__container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .upload__video {
+    width: 40%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;

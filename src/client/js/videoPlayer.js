@@ -41,7 +41,8 @@ const handlePlayClick = (e) => {
     video.pause();
     screenPlay.style.opacity = "0.6";
   }
-  playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
+  console.log(playBtnIcon);
+  playBtnIcon.className = video.paused ? "fas fa-play" : "fas fa-pause";
 };
 
 const handleMuteClick = (e) => {
@@ -95,6 +96,7 @@ const handleFullscreen = () => {
     fullScreenIcon.classList = "fas fa-expand";
   } else {
     videoContainer.requestFullscreen();
+    video.display = "flex";
     fullScreenIcon.classList = "fas fa-compress";
   }
 };
@@ -115,10 +117,8 @@ const handlePlayKeyUp = (event) => {
 };
 const mouseLeaveVideo = () => {
   window.removeEventListener("keydown", removeWindowPreventKey);
-  // eslint-disable-next-line no-use-before-define
   video.removeEventListener("mouseover", mouseOnVideo);
   document.removeEventListener("keyup", handlePlayKeyUp);
-  // eslint-disable-next-line no-use-before-define
   video.addEventListener("mouseover", mouseOnVideo);
 };
 const mouseOnVideo = () => {
