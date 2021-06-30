@@ -5,7 +5,8 @@
 }
 .video-grid {
   display: grid;
-  grid-gap: 50px;
+  column-gap: 40px;
+  row-gap: 70px;
   height: 100%;
   grid-template-columns: repeat(4, minmax(180px, 1fr));
   .video-mixin:first-child,
@@ -29,7 +30,20 @@
 @media screen and (max-width: 890px) {
   .video-grid {
     display: grid;
-    grid-gap: 50px;
+    row-gap: 70px;
+    height: 100%;
+    grid-template-columns: 1fr;
+    .video-mixin:first-child,
+    .video-mixin:nth-child(2) {
+      grid-column: span 1;
+    }
+  }
+}
+
+@media screen and (max-device-width: 480px) {
+  .video-grid {
+    display: grid;
+    row-gap: 70px;
     height: 100%;
     grid-template-columns: 1fr;
     .video-mixin:first-child,

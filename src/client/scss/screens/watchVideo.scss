@@ -132,3 +132,21 @@
     }
   }
 }
+
+@media screen and (max-device-width: 480px) {
+  .main-video__section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .video__section {
+      width: 95%;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      margin-bottom: 50px;
+      .video__comments {
+        max-width: 420px;
+      }
+    }
+  }
+}

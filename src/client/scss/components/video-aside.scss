@@ -17,3 +17,9 @@
     width: 95%;
   }
 }
+
+@media screen and (max-device-width: 480px) {
+  .aside-video__section {
+    width: 84%;
+  }
+}
