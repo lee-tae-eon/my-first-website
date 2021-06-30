@@ -2,9 +2,11 @@ extends ../main/layout
 
 
 block content
-  h4 Update Video
-    form(method="POST")
-      input(name="title", placeholder="video title", value=video.title, required, type="text", minlength=3)
-      textarea(name="description", maxlength=200, required, rows="7", cols="66"  )=video.description
-      input(name="hashtags", placeholder="Hashtags, separated by comma", required, type="text", value=video.hashtags.join())
-      input(value="save", type="submit")
+  form(method="POST")
+    label(for="editVideoTitle") Title
+    input(id="editVideoTitle",name="title", placeholder="video title", value=video.title, required, type="text", minlength=3)
+    label(for="editVideoDesc") Description
+    textarea(id="editVideoDesc",name="description", maxlength=200, required, rows="7", cols="66"  )=video.description
+    label(for="editVideoHash") HashTags
+    input(id="editVideoHash",name="hashtags", placeholder="Hashtags, separated by comma", required, type="text", value=video.hashtags.join())
+    input(value="save", type="submit")
