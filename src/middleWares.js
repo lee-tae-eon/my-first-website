@@ -5,6 +5,9 @@ import aws from "aws-sdk";
 
 const megaByte = 1000000;
 
+const isHeroku = process.env.NODE_ENV === "production";
+
+// aws s3-----------------
 const s3 = new aws.S3({
   credentials: {
     accessKeyId: process.env.AWS_ID,
@@ -12,11 +15,18 @@ const s3 = new aws.S3({
   },
 });
 
-const multerS3Uploader = multerS3({
+const S3ImageUploader = multerS3({
   s3: s3,
-  bucket: "gyumtube",
+  bucket: "gyumtube/images",
   acl: "public-read",
 });
+
+const S3VideoUploader = multerS3({
+  s3: s3,
+  bucket: "gyumtube/videos",
+  acl: "public-read",
+});
+//=======================================
 
 export const loggerMiddleWare = morgan("dev");
 
@@ -50,7 +60,7 @@ export const avatarUploadMiddleWare = multer({
   limits: {
     fileSize: megaByte * 10,
   },
-  storage: multerS3Uploader,
+  storage: isHeroku ? S3ImageUploader : undefined,
 });
 
 export const videoUploadMiddleWare = multer({
@@ -58,5 +68,5 @@ export const videoUploadMiddleWare = multer({
   limits: {
     fileSize: megaByte * 30,
   },
-  storage: multerS3Uploader,
+  storage: isHeroku ? S3VideoUploader : undefined,
 });

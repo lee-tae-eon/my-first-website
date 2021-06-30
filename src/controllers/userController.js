@@ -163,6 +163,7 @@ export const postEditUser = async (req, res) => {
     body: { name, email, username, location },
     file,
   } = req;
+  console.log(file);
   const existUsername = await User.findOne({ username });
   const existEmail = await User.findOne({ email });
 
@@ -175,11 +176,12 @@ export const postEditUser = async (req, res) => {
       errMsg: "This username or email is aleady taken",
     });
   }
+  const isHeroku = process.env.NODE_ENV === "production";
 
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? file.location : avatarUrl,
+      avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
       name,
       email,
       username,
