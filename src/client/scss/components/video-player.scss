@@ -1,9 +1,13 @@
 #videoContainer {
   width: 100%;
   display: flex;
+  padding: 10px;
   justify-content: center;
   align-items: center;
   position: relative;
+  background-color: $videobg;
+  box-shadow: $boxshadow;
+  border-radius: 10px;
   video {
     width: 100%;
   }

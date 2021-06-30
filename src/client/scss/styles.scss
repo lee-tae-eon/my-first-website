@@ -32,8 +32,10 @@ body {
 }
 
 main {
-  max-width: 1200px;
+  padding-top: 80px;
+  max-width: 1400px;
   width: 100%;
+  min-height: 100vh;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
