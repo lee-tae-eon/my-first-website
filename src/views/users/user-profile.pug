@@ -3,12 +3,17 @@ include ../mixins/videos
 
 block content
   div.profile__data
-    if user.socialLogin === true
-      img(src=user.avatarUrl).avatar
-      h3=user.name
+    if user.avatarUrl == null 
+      img(src="../../noImage/noImage.png")
     else 
-      img(src="/" + user.avatarUrl).avatar
-      h3=user.name
+      if isHeroku 
+        img(src=user.avatarUrl).avatar
+      else
+        if user.avatarUrl.includes("github")
+          img(src=user.avatarUrl).avatar
+        else 
+          img(src="/" + user.avatarUrl).avatar
+    h3=user.name
   if user.videos
     div.video-grid
       each video in user.videos 
