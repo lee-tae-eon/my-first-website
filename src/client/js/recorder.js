@@ -93,6 +93,7 @@ const handleStart = () => {
     video.play();
   };
   recorder.start();
+  setTimeout(handleStop, 3000);
 };
 
 const init = async () => {
