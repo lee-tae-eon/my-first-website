@@ -11,6 +11,7 @@
 @import "./components/social-login";
 @import "./components/video-player";
 @import "./components//video-aside";
+@import "./components/pagination";
 // screens
 @import "./screens/home";
 @import "./screens/search";
@@ -32,13 +33,14 @@ body {
 }
 
 main {
-  padding-top: 80px;
+  padding-top: 100px;
   max-width: 1400px;
   width: 100%;
   min-height: 100vh;
-  margin: 50px auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 @keyframes goAway {

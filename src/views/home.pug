@@ -7,3 +7,29 @@ block content
       +video(video)
     else 
       span.empty__msg 비디오를 찾지 못했습니다.
+  ul.pagination
+    if startPage > maxPost
+      li 
+        a.prev_btn.pageBtn(href=`/?page=${startPage-1}`) 32
+          i.fas.fa-angle-double-left
+    //- else
+    //-   li 
+    //-     a.prev_btn.pageBtn.disabled(href="javascript:void(0);")
+    //-       i.fas.fa-angle-double-left
+
+    -for(let i = startPage; i <= endPage; i++)
+      if i === currentPage 
+        li 
+          a.pageBtn.current(href=`/?page=${i}`)=i
+      else 
+        li 
+          a.pageBtn(href=`/?page=${i}`)=i
+
+    if endPage < totalPage 
+      li 
+        a.next_btn.pageBtn(href=`/?page=${endPage + 1}`)
+
+    
+    
+
+    
