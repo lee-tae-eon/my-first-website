@@ -5,9 +5,9 @@ import Video from "../models/Video";
 import axios from "axios";
 import qs from "qs";
 
-const isHeroku = process.env.NODE_ENV === "production";
-const redirect_uri = "http://localhost:4000/users/kakao/callback";
-const heroku_redirect_uri = "http://gyumtube.herokuapp.com/users/kakao/finish";
+// const isHeroku = process.env.NODE_ENV === "production";
+// const redirect_uri = "http://localhost:4000/users/kakao/callback";
+// const heroku_redirect_uri = "http://gyumtube.herokuapp.com/users/kakao/callback";
 
 // 회원가입 -------
 export const getJoin = (req, res) => res.render("Join", { pageTitle: "Join" });

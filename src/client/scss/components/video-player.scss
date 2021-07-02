@@ -2,12 +2,23 @@
   width: 100%;
   display: flex;
   padding: 10px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   background-color: $videobg;
   box-shadow: $boxshadow;
   border-radius: 10px;
+  button {
+    all: unset;
+    background-color: $bg;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+  }
   video {
     width: 100%;
   }
