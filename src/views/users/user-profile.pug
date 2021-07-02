@@ -9,7 +9,7 @@ block content
       if isHeroku 
         img(src=user.avatarUrl).avatar
       else
-        if user.avatarUrl.includes("github")
+        if user.socialLogin
           img(src=user.avatarUrl).avatar
         else 
           img(src="/" + user.avatarUrl).avatar

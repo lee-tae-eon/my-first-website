@@ -2,7 +2,8 @@ import fetch from "node-fetch";
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import Video from "../models/Video";
-const fs = require("fs");
+import axios from "axios";
+import qs from "qs";
 
 // 회원가입 -------
 export const getJoin = (req, res) => res.render("Join", { pageTitle: "Join" });
@@ -70,6 +71,72 @@ export const postLogin = async (req, res) => {
   return res.redirect("/");
 };
 
+// 카카오 로그인
+
+export const loginKakao = (req, res) => {
+  const redirect_uri = "http://localhost:4000/users/kakao/callback";
+  const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_ID}&redirect_uri=${redirect_uri}&scope=profile_nickname,profile_image,account_email`;
+  return res.redirect(kakaoAuthUrl);
+};
+
+export const finishKakao = async (req, res) => {
+  const redirect_uri = "http://localhost:4000/users/kakao/callback";
+  let token;
+  try {
+    token = await axios({
+      method: "POST",
+      url: "https://kauth.kakao.com/oauth/token",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+      data: qs.stringify({
+        grant_type: "authorization_code",
+        client_id: process.env.KAKAO_ID,
+        client_secret: process.env.KAKAO_SECRET,
+        redirectUri: redirect_uri,
+        code: req.query.code,
+      }),
+    });
+  } catch (err) {
+    console.log("redirect err : ", err);
+    return res.status(404).redirect("/login");
+  }
+
+  try {
+    // console.log("token : ", token);
+    const tokenUser = await axios({
+      method: "get",
+      url: "https://kapi.kakao.com/v2/user/me",
+      headers: {
+        Authorization: `Bearer ${token.data.access_token}`,
+      },
+    });
+    const {
+      profile: { nickname, profile_image_url },
+      email,
+    } = tokenUser.data.kakao_account;
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({
+        avatarUrl: profile_image_url,
+        name: nickname,
+        username: nickname,
+        email,
+        password: "",
+        socialLogin: true,
+        location: "",
+      });
+    }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
+  } catch (err) {
+    console.log("user's data get err :", err);
+    return res.status(404).redirect("/login");
+  }
+};
+
+// 깃헙 로그인
 export const loginGithub = (req, res) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
   const config = {

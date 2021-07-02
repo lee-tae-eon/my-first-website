@@ -1,6 +1,7 @@
 import express from "express";
 import {
-  deleteUser,
+  loginKakao,
+  finishKakao,
   logout,
   loginGithub,
   finishGithub,
@@ -31,6 +32,9 @@ userRouter
   .post(postChangePwd);
 userRouter.get("/github/start", publicOnlyMiddleWare, loginGithub);
 userRouter.get("/github/finish", publicOnlyMiddleWare, finishGithub);
+userRouter.get("/kakao/start", publicOnlyMiddleWare, loginKakao);
+userRouter.get("/kakao/callback", publicOnlyMiddleWare, finishKakao);
+
 userRouter.get("/:id", userProfile);
 
 export default userRouter;

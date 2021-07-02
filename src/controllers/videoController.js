@@ -3,13 +3,61 @@ import User from "../models/User";
 import Comment from "../models/Comment";
 const fs = require("fs");
 
-// Video.find({}, (error, videos) => {});
+// 페이징 구현 함수
+const paging = (page, totalPost) => {
+  const maxPost = 5;
+  const maxPage = 5;
+  let currentPage = page ? parseInt(page) : 1;
+  const hidePost = page === 1 ? 0 : (page - 1) * maxPost;
+  const totalPage = Math.ceil(totalPost / maxPost);
+
+  if (currentPage > totalPage) {
+    currentPage = totalPage;
+  }
+
+  const startPage = Math.floor((currentPage - 1) / maxPage) * maxPage + 1;
+
+  let endPage = startPage + maxPage - 1;
+  if (endPage > totalPage) {
+    endPage = totalPage;
+  }
+
+  return { startPage, endPage, hidePost, maxPost, totalPage, currentPage };
+};
+
 export const home = async (req, res) => {
+  const { page } = req.query;
+  console.log(req.query);
+
+  const totalVideo = await Video.countDocuments({});
+  console.log(totalVideo);
+
+  if (!totalVideo) {
+    return res.status(404).render("home", { pageTitle: "Home" });
+  }
+
+  let { startPage, endPage, maxPost, hidePost, totalPage, currentPage } =
+    paging(page, totalVideo);
+
+  console.log(
+    `start:${startPage} - endPage:${endPage} - maxPost:${maxPost} - hidePost:${hidePost} - totalPage:${totalPage} - currentPage:${currentPage}`
+  );
+
   const videos = await Video.find({})
     .sort({ createdAt: "desc" })
+    .skip(hidePost)
+    .limit(maxPost)
     .populate("owner");
 
-  return res.render("home", { pageTitle: "Home", videos });
+  return res.render("home", {
+    pageTitle: "Home",
+    videos,
+    currentPage,
+    totalPage,
+    startPage,
+    endPage,
+    maxPost,
+  });
 };
 
 export const watchVideo = async (req, res) => {

@@ -26,7 +26,7 @@ header
               if isHeroku
                 img(src=loggedInUser.avatarUrl).header__avatar
               else
-                if loggedInUser.avatarUrl.includes("github")
+                if loggedInUser.socialLogin
                   img(src=loggedInUser.avatarUrl).header__avatar
                 else
                   img(src="/" + loggedInUser.avatarUrl).header__avatar 
