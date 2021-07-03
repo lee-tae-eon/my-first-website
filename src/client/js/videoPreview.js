@@ -3,7 +3,6 @@ const videos = videoGrid.querySelectorAll("video");
 
 const handlePreviewEnd = (event) => {
   const video = event.target;
-  console.log("mouse out", event);
   video.pause();
   video.currentTime = 0;
   video.removeEventListener("mouseout", handlePreviewEnd);
@@ -12,8 +11,6 @@ const handlePreviewEnd = (event) => {
 
 const handlePreview = (event) => {
   const video = event.target;
-  // video.autoplay = true;
-  console.log("mouse out", event);
   video.muted = true;
   video.play();
   video.removeEventListener("mouseover", handlePreview);

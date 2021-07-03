@@ -12,10 +12,6 @@ block content
       li 
         a.prev_btn.pageBtn(href=`/?page=${startPage-1}`) 32
           i.fas.fa-angle-double-left
-    //- else
-    //-   li 
-    //-     a.prev_btn.pageBtn.disabled(href="javascript:void(0);")
-    //-       i.fas.fa-angle-double-left
 
     -for(let i = startPage; i <= endPage; i++)
       if i === currentPage 

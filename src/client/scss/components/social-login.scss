@@ -6,11 +6,11 @@
   flex-direction: column;
   .social__btn--github {
     background-color: transparent;
-    color: green !important;
+    color: $github !important;
     margin-bottom: 20px;
   }
   .social__btn--kakao {
     background-color: transparent;
-    color: #fee500 !important;
+    color: $kakao !important;
   }
 }

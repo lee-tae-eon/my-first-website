@@ -5,7 +5,7 @@ const fs = require("fs");
 
 // 페이징 구현 함수
 const paging = (page, totalPost) => {
-  const maxPost = 5;
+  const maxPost = 20;
   const maxPage = 5;
   let currentPage = page ? parseInt(page) : 1;
   const hidePost = page === 1 ? 0 : (page - 1) * maxPost;
@@ -70,7 +70,7 @@ export const watchVideo = async (req, res) => {
   }
   const videos = await Video.find({
     title: {
-      $regex: new RegExp(video.title, "i"),
+      $regex: new RegExp(video.hashtags, "i"),
     },
     _id: { $ne: id },
   }).populate("owner");
