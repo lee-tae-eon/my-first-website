@@ -5,6 +5,8 @@
   border-radius: 10px;
   margin: 0 auto;
   box-shadow: $boxshadow;
+  overflow: scroll;
+  max-height: 100vh;
   .next__video-list {
     display: grid;
     grid-template-columns: 1fr;

@@ -31,6 +31,9 @@ block content
 
             div.video__data
                 h2.video__title=video.title
+                div.video__hash
+                    each hash in video.hashtags
+                        span=hash
                 p.video__description=video.description
                 small.video__owner Uploaded by 
                     a(href=`/users/${video.owner._id}`)=video.owner.name

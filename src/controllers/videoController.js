@@ -68,9 +68,11 @@ export const watchVideo = async (req, res) => {
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
+  const regHash = video.hashtags.map((hash) => hash.replace("#", "").trim());
+  console.log(...regHash);
   const videos = await Video.find({
-    title: {
-      $regex: new RegExp(video.hashtags, "i"),
+    hashtags: {
+      $in: video.hashtags,
     },
     _id: { $ne: id },
   }).populate("owner");
