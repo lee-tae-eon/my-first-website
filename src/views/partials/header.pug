@@ -1,38 +1,67 @@
 header
-  a(href="/").header__logo
-    i.fab.fa-youtube  
-  nav 
-    ul
-      li
-        a(href="/search") Search 
-          i.fas.fa-search
-        //- 태언 서치코드 - 완료후 이 코드로
-        //- form(method="GET" action="/search")
-        //-   input(placeholder="Search", type="text", name="keyword")
-        //-   input(type="submit", value="🔍 Search")
-    ul
+  div.burger__menu#burgerMenu
+    ul.burger-lists
       if loggedIn
         li
-          a(href="/videos/upload") 업로드
+          a(href="/videos/upload") Uploads
         li 
-          a(href="/users/edit") 프로필 수정
+          a(href="/users/edit") Edit Profile
         li 
-          a(href="/users/logout") 로그아웃
+          a(href="/users/logout") Log Out
+        li.burger-profile 
+          a(href=`/users/${loggedInUser._id}`)
+            if loggedInUser.avatarUrl === null
+              span 🤪  #{loggedInUser.name}'s Profile  
+            else 
+              if isHeroku
+                img(src=loggedInUser.avatarUrl).burger__avatar
+              else
+                if loggedInUser.avatarUrl.includes("github") || loggedInUser.avatarUrl.includes("kakao")
+                  img(src=loggedInUser.avatarUrl).burger__avatar
+                else
+                  img(src="/" + loggedInUser.avatarUrl).burger__avatar 
+              span #{loggedInUser.name}'s Profile  
+      else  
+        li 
+          a(href="/login") Log In
+        li 
+          a(href="/join").header__btn Join
+  a(href="/").header__logo
+    i.fab.fa-youtube
+  span.burger-icon#burgerIcon 
+    i.fas.fa-bars  
+  nav.navigation-bar 
+    div.nav-search
+      //- a(href="/search") Search 
+      //-   i.fas.fa-search
+        //- 태언 서치코드 - 완료후 이 코드로
+      form(method="GET" action="/search").search__form
+        input(placeholder="Search", type="text", name="keyword")
+        button 
+          i.fas.fa-search
+    ul.nav-lists
+      if loggedIn
+        li
+          a(href="/videos/upload") Uploads
+        li 
+          a(href="/users/edit") Edit Profile
+        li 
+          a(href="/users/logout") Log Out
         li.header-profile 
           a(href=`/users/${loggedInUser._id}`)
             if loggedInUser.avatarUrl === null
-              span 🤪  #{loggedInUser.name}님의 프로필  
+              span 🤪  #{loggedInUser.name}'s Profile  
             else 
               if isHeroku
                 img(src=loggedInUser.avatarUrl).header__avatar
               else
-                if loggedInUser.socialLogin
+                if loggedInUser.avatarUrl.includes("github") || loggedInUser.avatarUrl.includes("kakao")
                   img(src=loggedInUser.avatarUrl).header__avatar
                 else
                   img(src="/" + loggedInUser.avatarUrl).header__avatar 
-              span #{loggedInUser.name}님의 프로필
+              span #{loggedInUser.name}'s Profile  
       else  
         li 
-          a(href="/login") 로그인
+          a(href="/login") Log In
         li 
           a(href="/join").header__btn Join

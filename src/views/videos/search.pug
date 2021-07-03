@@ -2,18 +2,8 @@ extends ../main/layout
 include ../mixins/videos
 
 block content 
-  form(method="GET").search__form
-    input(placeholder="Search", type="text", name="keyword")
-    button
-      i.fas.fa-search
   div.video-grid#videoGrid
     each video in videos
       +video(video)
     else
       span.empty__msg 비디오를 찾지 못했습니다.
-
-  //- 태언 서치코드 완료후 이코드로
-  //- each video in videos
-  //-   +video(video)
-  //- else 
-  //-   li Nothing found
