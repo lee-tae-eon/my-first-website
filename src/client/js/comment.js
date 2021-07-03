@@ -51,11 +51,10 @@ const addComment = (text, newCommentId) => {
 
 const handleCommentSubmit = async (event) => {
   event.preventDefault();
-
   const text = textarea.value;
   const videoId = videoContainer.dataset.id;
 
-  if (text === "") {
+  if (text.trim() === "") {
     return;
   }
   const response = await fetch(`/api/videos/${videoId}/comment`, {
@@ -64,7 +63,7 @@ const handleCommentSubmit = async (event) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      text,
+      text: text,
     }),
   });
   textarea.value = "";
@@ -77,14 +76,12 @@ const handleCommentSubmit = async (event) => {
 const handleEnterKey = (event) => {
   if (event.key === "Enter") {
     if (!event.shiftKey) {
-      event.preventDefault();
       submitBtn.click();
     }
   } else {
     return;
   }
 };
-
 const handleCommentDelete = async (event) => {
   console.log(event);
   if (confirm("Are you sure???") === true) {
@@ -103,7 +100,7 @@ const handleCommentDelete = async (event) => {
 
 if (form) {
   form.addEventListener("submit", handleCommentSubmit);
-  textarea.addEventListener("keydown", handleEnterKey);
+  textarea.addEventListener("keyup", handleEnterKey);
 }
 
 for (const delBtn of deleteBtns) {
