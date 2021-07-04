@@ -100,7 +100,7 @@ const handleCommentDelete = async (event) => {
 
 if (form) {
   form.addEventListener("submit", handleCommentSubmit);
-  textarea.addEventListener("keyup", handleEnterKey);
+  textarea.addEventListener("keypress", handleEnterKey);
 }
 
 for (const delBtn of deleteBtns) {

@@ -3,7 +3,7 @@ header
     ul.burger-lists
       if loggedIn
         li
-          a(href="/videos/upload") Vidoe Uploads
+          a(href="/videos/upload") Video Uploads
         li 
           a(href="/photos/upload") Photo Uploads
         li 
@@ -33,7 +33,7 @@ header
   span.burger-icon#burgerIcon 
     i.fas.fa-bars  
   nav.navigation-bar 
-    div.nav-search     
+    div.nav-search#navSearch     
       form(method="GET" action="/videos/search").search__form  
         input(placeholder="Search", type="text", name="keyword")
         button 
@@ -45,7 +45,7 @@ header
     ul.nav-lists
       if loggedIn
         li
-          a(href="/videos/upload") Vidoe Uploads
+          a(href="/videos/upload") Video Uploads
         li 
           a(href="/photos/upload") Photo Uploads
         li 
@@ -70,3 +70,6 @@ header
           a(href="/login") Log In
         li 
           a(href="/join").header__btn Join
+
+block scripts 
+  script(src="/static/js/search.js")

@@ -80,6 +80,61 @@
           font-size: 10px;
         }
       }
+
+      .photo__comments {
+        max-width: 600px;
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 50px;
+        .photo__comments-list {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 10px;
+          width: 100%;
+          .photo__comment {
+            width: 100%;
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .comment__content {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              .comment__text {
+                width: 80%;
+                display: flex;
+                flex-wrap: wrap;
+                letter-spacing: 1px;
+                span {
+                  margin-left: 10px;
+                }
+              }
+              .comment__date {
+                margin-right: 10px;
+                font-size: 9px;
+                color: rgba(0, 0, 0, 0.3);
+              }
+            }
+            .comment__delete {
+              button {
+                border: none;
+                background-color: inherit;
+                cursor: pointer;
+                color: red;
+                transition: all 0.4s linear foward;
+                &:hover {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

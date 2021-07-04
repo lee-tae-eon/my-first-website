@@ -100,7 +100,7 @@ const handleCommentDelete = async (event) => {
 
 if (photoForm) {
   photoForm.addEventListener("submit", handleCommentSubmit);
-  photoTextarea.addEventListener("keyup", handleEnterKey);
+  photoTextarea.addEventListener("keypress", handleEnterKey);
 }
 
 for (const delBtn of photoCommentDel) {
