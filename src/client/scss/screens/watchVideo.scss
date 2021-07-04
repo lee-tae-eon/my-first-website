@@ -20,27 +20,33 @@
       .video__hash {
         margin-bottom: 20px;
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.5);
+        color: $hash;
       }
       .video__description {
         font-size: 20px;
         margin-bottom: 20px;
+        line-height: 30px;
       }
       .video__createAt {
         font-size: 12px;
+        margin-bottom: 20px;
       }
       .video__owner {
         margin-bottom: 15px;
         font-size: 14px;
         a {
-          font-size: 16px;
+          font-size: 18px;
           font-weight: 800;
           color: cornflowerblue;
           text-decoration: underline;
+          letter-spacing: 2px;
         }
       }
-      .video__createdAt {
-        margin-bottom: 19px;
+      .edit__btn,
+      .delete__btn {
+        color: #759ec3;
+        font-weight: 500;
+        font-size: 25px;
       }
     }
     .video__add-comments {

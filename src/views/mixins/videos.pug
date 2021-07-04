@@ -1,13 +1,13 @@
 mixin video(video)
-  a(href=`/videos/${video.id}`).video-mixin
-    div.video-mixin__thumb
+  a(href=`/videos/${video.id}`).media-mixin
+    div.media-mixin__thumb
       if isHeroku
-        video.thumb__video(src=video.fileUrl)
+        video.thumb__media(src=video.fileUrl)
       else
-        video.thumb__video(src="/" + video.fileUrl)
-    div.video-mixin__data
-      span.video-mixin__title=video.title
-      div.video-mixin__meta
+        video.thumb__media(src="/" + video.fileUrl)
+    div.media-mixin__data
+      span.media-mixin__title=video.title
+      div.media-mixin__meta
         span #{video.owner.name} 
         span #{video.meta.views} 회
       

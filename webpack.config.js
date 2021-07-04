@@ -11,6 +11,8 @@ module.exports = {
     comment: BASE_JS + "comment.js",
     videoPreview: BASE_JS + "videoPreview.js",
     sideNav: BASE_JS + "sideNav.js",
+    search: BASE_JS + "search.js",
+    photoComment: BASE_JS + "photoComment.js",
   },
   mode: "development",
   plugins: [

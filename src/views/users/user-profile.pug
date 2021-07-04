@@ -1,5 +1,6 @@
 extends ../main/layout
 include ../mixins/videos
+include ../mixins/photos
 
 block content
   div.profile__data
@@ -14,11 +15,23 @@ block content
         else 
           img(src="/" + user.avatarUrl).avatar
     h3=user.name
+  hr
+  h1.profile__title Video
   if user.videos
-    div.video-grid#videoGrid
+    div.profile--video__grid
       each video in user.videos 
         +video(video)
       else  
         li Sorry not found
   else 
     span.empty__message No videos found
+  hr
+  h1.profile__title Photo
+  if user.videos
+    div.profile--photo__grid
+      each photo in user.photos 
+        +photo(photo)
+      else  
+        li Sorry not found
+  else 
+    span.empty__message No photo found

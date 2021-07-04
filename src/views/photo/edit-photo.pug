@@ -1,0 +1,11 @@
+extends ../main/layout
+
+block content 
+  form(method="POST")
+    label(for="editPhotoTitle") Title
+    input(id="editPhotoTitle",name="title", placeholder="photo title", value=photo.title, required, type="text", minlength=3)
+    label(for="editPhotoDesc") Description
+    textarea(id="editPhotoDesc",name="description", maxlength=300, required, rows="7", cols="66"  )=photo.description
+    label(for="editPhotoHash") HashTags
+    input(id="editPhotoHash",name="hashtags", placeholder="Hashtags, separated by comma", required, type="text", value=photo.hashtags.join())
+    input(value="save", type="submit")

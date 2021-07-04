@@ -6,11 +6,14 @@ import {
   getUpload,
   postUpload,
   deleteVideo,
+  videoHome,
+  videoSearch,
 } from "../controllers/videoController";
 import { protectMiddleWare, videoUploadMiddleWare } from "../middleWares";
 
 const videoRouter = express.Router();
 
+videoRouter.get("/", videoHome);
 videoRouter.get("/:id([0-9a-f]{24})", watchVideo);
 videoRouter
   .route("/:id([0-9a-f]{24})/edit")
@@ -32,5 +35,6 @@ videoRouter
     ]),
     postUpload
   );
+videoRouter.get("/search", videoSearch);
 
 export default videoRouter;

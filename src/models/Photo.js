@@ -1,16 +1,14 @@
 import mongoose from "mongoose";
 
-const videoSchema = new mongoose.Schema({
+const photoSchema = new mongoose.Schema({
   title: {
     type: String,
-    requried: true,
-    trim: true,
+    required: true,
     minLength: 3,
     maxLength: 80,
   },
   fileUrl: { type: String, required: true },
-  thumbUrl: { type: String },
-  description: { type: String, requried: true, trim: true, maxLength: 350 },
+  description: { type: String },
   createdAt: { type: Date, required: true, default: Date.now },
   hashtags: [{ type: String, trim: true }],
   meta: {
@@ -21,13 +19,12 @@ const videoSchema = new mongoose.Schema({
   owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
 });
 
-//static function(for hashtags)
-videoSchema.static("formatHashtags", function (hashtags) {
+photoSchema.static("formatHashtags", function (hashtags) {
   return hashtags
     .split(",")
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });
 
-const Video = mongoose.model("Video", videoSchema);
+const Photo = mongoose.model("Photo", photoSchema);
 
-export default Video;
+export default Photo;

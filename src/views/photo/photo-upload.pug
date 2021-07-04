@@ -1,0 +1,18 @@
+extends ../main/layout
+
+block content 
+  div.upload__container
+    if errorMessage 
+      span=errorMessage
+    form(method="POST", enctype="multipart/form-data")
+      label(for="photoFile") Photo File
+      input(name="photoFile", type="file", accept="image/*", required, id="photoFile")
+      label(for="photoTitle") Photo Title
+      input(name="title", type="text", placeholder="title", required, id="photoTitle"  minLength=3, maxLength=80 )
+      label(for="photoText") Photo Description 
+      textarea(name="description", type="text",placeholder="description", required, id="photoText",  maxLength=350 )
+      label(for="photoHash") Photo Hashtags
+      input(name="hashtags", type="text", placeholder="Hashtags, separated by comma", required, id="photoHash")
+      input(type="submit", value="Upload Photo")
+
+block scripts 

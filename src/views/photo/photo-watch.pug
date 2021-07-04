@@ -1,0 +1,46 @@
+extends ../main/layout
+
+block content 
+  div#photoContainer.photo-container(data-id=photo._id)
+    .photo-image
+      if isHeroku 
+        img(src=photo.fileUrl)
+      else 
+        img(src="/" + photo.fileUrl)
+    
+    .photo__data 
+      h2.photo__title=photo.title 
+      .photo__hash 
+        each hash in photo.hashtags
+          span=hash 
+      p.photo__description=photo.description 
+      small.photo__owner Uploaded by 
+        a(href=`users/${photo.owner._id}`)=photo.owner.name 
+      small.photo__createdAt=new Date(photo.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+      if String(photo.owner._id) === String(loggedInUser._id)
+        a(href=`${photo.id}/edit`).edit__btn Edit Photo 
+        br
+        a(href=`${photo.id}/delete`).delete__btn Delete Photo 
+      if loggedIn 
+        .photo__add-comments 
+          form.photo__comment-form#photoCommentForm
+            textarea(placeholder="Write comment...", )
+            button Add Comment
+
+          div.photo__comments
+            ul.photo__comments-list#photoCommentList
+              each comment in photo.comments.reverse()
+                li.photo__comment(data-id=comment._id)
+                  div.comment__content
+                    div.comment__text
+                      i.fas.fa-comment
+                      span  #{comment.text}  
+                    span.comment__date  #{comment.createdAt.toLocaleString("ko-KR")} 
+                  div.comment__delete
+                    if String(comment.owner) === String(loggedInUser._id)
+                      button 🗑
+
+
+block scripts 
+  if loggedIn 
+    script(src="/static/js/photoComment.js")

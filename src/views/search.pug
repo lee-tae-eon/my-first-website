@@ -1,0 +1,17 @@
+extends ./main/layout
+include ./mixins/videos
+include ./mixins/photos
+
+block content 
+  if videos
+    div.video-grid#videoGrid  
+        each video in videos
+          +video(video)
+        else
+          span.empty__msg 비디오를 찾지 못했습니다.
+  else if photos
+    div.photo-grid#photoGrid
+      each photo in photos 
+        +photo(photo)
+      else
+        span.empty__msg 사진을 찾지 못했습니다.

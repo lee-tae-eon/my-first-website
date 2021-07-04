@@ -26,6 +26,12 @@ const S3VideoUploader = multerS3({
   bucket: "gyumtube/videos",
   acl: "public-read",
 });
+
+const S3PhotoUploader = multerS3({
+  s3: s3,
+  bucket: "gyumtube/photos",
+  acl: "public-read",
+});
 //=======================================
 
 export const loggerMiddleWare = morgan("dev");
@@ -59,7 +65,7 @@ export const publicOnlyMiddleWare = (req, res, next) => {
 export const avatarUploadMiddleWare = multer({
   dest: "uploads/avatars/",
   limits: {
-    fileSize: megaByte * 10,
+    fileSize: megaByte,
   },
   storage: isHeroku ? S3ImageUploader : undefined,
 });
@@ -67,7 +73,15 @@ export const avatarUploadMiddleWare = multer({
 export const videoUploadMiddleWare = multer({
   dest: "uploads/videos/",
   limits: {
-    fileSize: megaByte * 30,
+    fileSize: megaByte * 2,
   },
   storage: isHeroku ? S3VideoUploader : undefined,
+});
+
+export const photoUploadMiddleWare = multer({
+  dest: "uploads/photos/",
+  limit: {
+    fileSize: megaByte,
+  },
+  storage: isHeroku ? S3PhotoUploader : undefined,
 });

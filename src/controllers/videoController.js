@@ -25,7 +25,7 @@ const paging = (page, totalPost) => {
   return { startPage, endPage, hidePost, maxPost, totalPage, currentPage };
 };
 
-export const home = async (req, res) => {
+export const videoHome = async (req, res) => {
   const { page } = req.query;
   console.log(req.query);
 
@@ -33,7 +33,7 @@ export const home = async (req, res) => {
   console.log(totalVideo);
 
   if (!totalVideo) {
-    return res.status(404).render("home", { pageTitle: "Home" });
+    return res.status(404).render("videos/video-home", { pageTitle: "Home" });
   }
 
   let { startPage, endPage, maxPost, hidePost, totalPage, currentPage } =
@@ -49,7 +49,7 @@ export const home = async (req, res) => {
     .limit(maxPost)
     .populate("owner");
 
-  return res.render("home", {
+  return res.render("videos/video-home", {
     pageTitle: "Home",
     videos,
     currentPage,
@@ -102,7 +102,7 @@ export const getEditVideo = async (req, res) => {
 
   if (String(video.owner) !== String(_id)) {
     req.flash("error", "You are not the owner");
-    return res.status(403).redirect("/");
+    return res.status(403).redirect("/videos");
   }
   return res.render("videos/editVideo", {
     pageTitle: `Edit ${video.title}`,
@@ -119,19 +119,20 @@ export const postEditVideo = async (req, res) => {
     },
   } = req;
 
-  const video = await Video.exists({ _id: id });
+  const video = await Video.findById(id);
 
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   if (String(video.owner) !== String(_id)) {
-    return res.status(403).redirect("/");
+    return res.status(403).redirect("/videos");
   }
   await Video.findByIdAndUpdate(id, {
     title,
     description,
     hashtags: Video.formatHashtags(hashtags),
   });
+  video.save();
   req.flash("success", "Edit Success!");
   return res.redirect(`/videos/${id}`);
 };
@@ -197,7 +198,7 @@ export const deleteVideo = async (req, res) => {
   return res.redirect("/");
 };
 
-export const search = async (req, res) => {
+export const videoSearch = async (req, res) => {
   const { keyword } = req.query;
   let videos = [];
   if (keyword) {
@@ -212,7 +213,7 @@ export const search = async (req, res) => {
   //   $or: [{ title: { $regex: new RegExp(keyword, "i") } }, { description: { $regex: new RegExp(keyword, "i") } }],
   // });
 
-  return res.render("videos/search", { pageTitle: "Search", videos });
+  return res.render("search", { pageTitle: "Search", videos });
 };
 
 export const registerView = async (req, res) => {
@@ -256,7 +257,6 @@ export const deleteComment = async (req, res) => {
   const {
     params: { id },
   } = req;
-  console.log(id);
   const comment = await Comment.findById(id).populate("Video");
   const video = await Video.findById(comment.video);
 

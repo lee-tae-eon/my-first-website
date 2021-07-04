@@ -1,11 +1,12 @@
 import express from "express";
-import { home, search } from "../controllers/videoController";
+import { search } from "../controllers/videoController";
 import {
   getJoin,
   postJoin,
   getLogin,
   postLogin,
 } from "../controllers/userController";
+import { home } from "../controllers/rootController";
 import { publicOnlyMiddleWare } from "../middleWares";
 
 const rootRouter = express.Router();
@@ -17,6 +18,5 @@ rootRouter
   .all(publicOnlyMiddleWare)
   .get(getLogin)
   .post(postLogin);
-rootRouter.get("/search", search);
 
 export default rootRouter;

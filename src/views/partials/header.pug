@@ -3,7 +3,9 @@ header
     ul.burger-lists
       if loggedIn
         li
-          a(href="/videos/upload") Uploads
+          a(href="/videos/upload") Vidoe Uploads
+        li 
+          a(href="/photos/upload") Photo Uploads
         li 
           a(href="/users/edit") Edit Profile
         li 
@@ -31,18 +33,21 @@ header
   span.burger-icon#burgerIcon 
     i.fas.fa-bars  
   nav.navigation-bar 
-    div.nav-search
-      //- a(href="/search") Search 
-      //-   i.fas.fa-search
-        //- 태언 서치코드 - 완료후 이 코드로
-      form(method="GET" action="/search").search__form
+    div.nav-search     
+      form(method="GET" action="/videos/search").search__form  
         input(placeholder="Search", type="text", name="keyword")
         button 
           i.fas.fa-search
+      select(name="pageselect")
+          option(value="") select router 
+          option(value="video") video
+          option(value="photo") photo
     ul.nav-lists
       if loggedIn
         li
-          a(href="/videos/upload") Uploads
+          a(href="/videos/upload") Vidoe Uploads
+        li 
+          a(href="/photos/upload") Photo Uploads
         li 
           a(href="/users/edit") Edit Profile
         li 

@@ -1,9 +1,0 @@
-extends ../main/layout
-include ../mixins/videos
-
-block content 
-  div.video-grid#videoGrid
-    each video in videos
-      +video(video)
-    else
-      span.empty__msg 비디오를 찾지 못했습니다.

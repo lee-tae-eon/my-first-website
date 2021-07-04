@@ -1,0 +1,85 @@
+.photo-container {
+  max-width: 1000px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .photo-image {
+    max-width: 600px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    height: 600px;
+    line-height: 600px;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      max-width: 580px;
+      width: 80%;
+      height: 80%;
+      vertical-align: middle;
+    }
+  }
+  .photo__data {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    .photo__title {
+      font-size: 38px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .photo__hash {
+      color: $hash;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+    .photo__description {
+      font-size: 20px;
+      margin-bottom: 20px;
+      line-height: 30px;
+    }
+    .photo__owner {
+      margin-bottom: 15px;
+      font-size: 14px;
+      a {
+        font-size: 18px;
+        font-weight: 800;
+        color: cornflowerblue;
+        text-decoration: underline;
+        letter-spacing: 2px;
+      }
+    }
+    .photo__createdAt {
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+    .edit__btn,
+    .delete__btn {
+      color: #759ec3;
+      font-weight: 500;
+      font-size: 25px;
+    }
+    .photo__add-comments {
+      margin-top: 50px;
+      width: 100%;
+      .photo__comment-form {
+        position: relative;
+        button {
+          margin-top: 5px;
+          position: absolute;
+          right: 15px;
+          bottom: 5px;
+          padding: 3px 6px;
+          border: none;
+          border-radius: 6px;
+          background-color: #76708e;
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
