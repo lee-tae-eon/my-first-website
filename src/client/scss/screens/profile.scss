@@ -58,6 +58,10 @@ hr {
     width: 240px;
     height: 100%;
     background-size: cover;
+    &:hover {
+      width: 300px;
+      height: 172px;
+    }
     &:not(:last-child) {
       margin-right: 40px;
     }
@@ -67,6 +71,10 @@ hr {
       img {
         width: 240px;
         height: 140px;
+        &:hover {
+          width: 300px;
+          height: 172px;
+        }
       }
     }
   }
