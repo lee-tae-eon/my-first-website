@@ -1,12 +1,12 @@
 mixin photo(photo)
   a(href=`/photos/${photo.id}`).media-mixin 
-    .media-mixin__thumb 
+    div.media-mixin__thumb 
       if isHeroku 
         img.thumb__media(src=photo.fileUrl)
       else 
         img.thumb__media(src="/" + photo.fileUrl)
-    .meida-mixin__data 
+    div.meida-mixin__data 
       span.media-mixin__title=photo.title 
-      .media-mixin__meta 
+      div.media-mixin__meta 
         span #{photo.owner.name}
         span #{photo.meta.views} 회

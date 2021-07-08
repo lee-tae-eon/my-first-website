@@ -13,6 +13,7 @@ module.exports = {
     sideNav: BASE_JS + "sideNav.js",
     search: BASE_JS + "search.js",
     photoComment: BASE_JS + "photoComment.js",
+    homeAni: BASE_JS + "homeAni.js",
   },
   mode: "development",
   plugins: [

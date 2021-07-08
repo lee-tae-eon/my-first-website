@@ -2,11 +2,14 @@ extends ./main/layout
 
 block content 
   div#chooseSection.choose__section
-    div.home-video__back
+    div.home-video__back#homevideoRoute
       a(href="/videos")
         img(src="https://cdn.pixabay.com/photo/2014/06/04/08/10/projector-361784_1280.jpg")
-    div.home-photo__back
+    div.home-photo__back#homephotoRoute
       a(href="/photos")
         img(src="https://cdn.pixabay.com/photo/2017/03/24/07/28/instagram-2170420_1280.png")
 
   h1 Choice Media
+
+block scripts 
+  script(src="/static/js/homeAni.js")
