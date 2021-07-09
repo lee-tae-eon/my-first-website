@@ -8,7 +8,9 @@ block content
       span#leftBtn
         i.fas.fa-arrow-left   
       if isHeroku 
-        img(src=photo.fileUrl)
+        -for (let i = 0; i < photo.fileUrl.length; i++)      
+          div.photo--lists 
+            img(src=photo.fileUrl[i]).photo--list  
       else 
         -for (let i = 0; i < photo.fileUrl.length; i++)      
           div.photo--lists 

@@ -24,13 +24,14 @@ export const postPhotoUpload = async (req, res) => {
   const isHeroku = process.env.NODE_ENV === "production";
 
   const pfiles = files.map((file) => file.path);
+  const hfiles = files.map((file) => file.location);
   let fileUrl = [...pfiles];
+  let herokuFileUrl = [...hfiles];
   try {
     const newPhoto = await Photo.create({
       title,
       description,
-      // fileUrl: isHeroku ? file.location : files.path,
-      fileUrl,
+      fileUrl: isHeroku ? herokuFileUrl : fileUrl,
       owner: _id,
       hashtags: Photo.formatHashtags(hashtags),
     });
@@ -56,7 +57,6 @@ export const photoView = async (req, res) => {
   if (!photo) {
     return res.render("404", { pageTitle: "Photo not found" });
   }
-  console.log(photo);
 
   return res.render("photo/photo-watch", { pageTitle: "Photo", photo });
 };
@@ -143,10 +143,6 @@ export const photoSearch = async (req, res) => {
       },
     }).populate("owner");
   }
-  // 태언 서치코드 완료후 이코드로
-  // const videos = await Video.find({
-  //   $or: [{ title: { $regex: new RegExp(keyword, "i") } }, { description: { $regex: new RegExp(keyword, "i") } }],
-  // });
 
   return res.render("search", { pageTitle: "Search", photos });
 };
