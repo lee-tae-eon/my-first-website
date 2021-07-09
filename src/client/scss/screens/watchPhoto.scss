@@ -87,7 +87,6 @@
 .photo__add-comments {
   margin-top: 50px;
   width: 100%;
-  grid-column: span 3;
   .photo__comment-form {
     position: relative;
     button {
@@ -104,8 +103,7 @@
     }
   }
   .photo__comments {
-    width: 600px;
-    margin: 0 auto;
+    width: 100%;
     margin-top: 30px;
     margin-bottom: 50px;
     .photo__comments-list {

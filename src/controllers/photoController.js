@@ -153,7 +153,8 @@ export const photoComment = async (req, res) => {
     body: { text },
     session: { user },
   } = req;
-
+  console.log(id);
+  console.log(text);
   const photo = await Photo.findById(id);
 
   if (!photo) {

@@ -31,8 +31,8 @@ block content
   if loggedIn 
     .photo__add-comments 
       form.photo__comment-form#photoCommentForm
-        textarea(placeholder="Write comment...", )#photoTextarea
-        button#photoCommentButton Add Comment
+        textarea(placeholder="Write comment...", )
+        button Add Comment
 
       div.photo__comments
         ul.photo__comments-list#photoCommentList
@@ -49,6 +49,6 @@ block content
 
 
 block scripts
- script(src="/static/js/photoWatch.js")
   if loggedIn 
     script(src="/static/js/photoComment.js")
+  script(src="/static/js/photoWatch.js")
