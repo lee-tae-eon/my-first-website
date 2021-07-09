@@ -7,7 +7,7 @@ const photoSchema = new mongoose.Schema({
     minLength: 3,
     maxLength: 80,
   },
-  fileUrl: { type: String, required: true },
+  fileUrl: [{ type: String, required: true }],
   description: { type: String },
   createdAt: { type: Date, required: true, default: Date.now },
   hashtags: [{ type: String, trim: true }],

@@ -2,25 +2,45 @@
   max-width: 1000px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   .photo-image {
+    position: relative;
     max-width: 600px;
     border: 1px solid rgba(255, 255, 255, 0.7);
     height: 600px;
-    line-height: 600px;
-    text-align: center;
     border-radius: 10px;
+    margin-right: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-      max-width: 580px;
-      width: 80%;
-      height: 80%;
-      vertical-align: middle;
+    overflow: scroll;
+    span {
+      position: absolute;
+      bottom: 50%;
+      padding: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.2);
+      &:first-child {
+        right: 5px;
+      }
+      &:nth-child(2) {
+        left: 5px;
+      }
+    }
+    .photo--lists {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      img.photo--list {
+        width: 600px;
+        height: 80%;
+        object-fit: cover;
+      }
     }
   }
   .photo__data {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
     margin-bottom: 50px;
     display: flex;
     flex-direction: column;
@@ -62,75 +82,75 @@
       font-weight: 500;
       font-size: 25px;
     }
-    .photo__add-comments {
-      margin-top: 50px;
+  }
+}
+.photo__add-comments {
+  margin-top: 50px;
+  width: 100%;
+  grid-column: span 3;
+  .photo__comment-form {
+    position: relative;
+    button {
+      margin-top: 5px;
+      position: absolute;
+      right: 15px;
+      bottom: 5px;
+      padding: 3px 6px;
+      border: none;
+      border-radius: 6px;
+      background-color: #76708e;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 10px;
+    }
+  }
+  .photo__comments {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    .photo__comments-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
       width: 100%;
-      .photo__comment-form {
-        position: relative;
-        button {
-          margin-top: 5px;
-          position: absolute;
-          right: 15px;
-          bottom: 5px;
-          padding: 3px 6px;
-          border: none;
-          border-radius: 6px;
-          background-color: #76708e;
-          color: rgba(255, 255, 255, 0.8);
-          font-size: 10px;
-        }
-      }
-
-      .photo__comments {
-        max-width: 600px;
+      .photo__comment {
         width: 100%;
-        margin-top: 30px;
-        margin-bottom: 50px;
-        .photo__comments-list {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 10px;
+        border-radius: 10px;
+        background-color: white;
+        color: black;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .comment__content {
           width: 100%;
-          .photo__comment {
-            width: 100%;
-            border-radius: 10px;
-            background-color: white;
-            color: black;
-            padding: 10px 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .comment__text {
+            width: 80%;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .comment__content {
-              width: 100%;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              .comment__text {
-                width: 80%;
-                display: flex;
-                flex-wrap: wrap;
-                letter-spacing: 1px;
-                span {
-                  margin-left: 10px;
-                }
-              }
-              .comment__date {
-                margin-right: 10px;
-                font-size: 9px;
-                color: rgba(0, 0, 0, 0.3);
-              }
+            flex-wrap: wrap;
+            letter-spacing: 1px;
+            span {
+              margin-left: 10px;
             }
-            .comment__delete {
-              button {
-                border: none;
-                background-color: inherit;
-                cursor: pointer;
-                color: red;
-                transition: all 0.4s linear foward;
-                &:hover {
-                  font-size: 18px;
-                }
-              }
+          }
+          .comment__date {
+            margin-right: 10px;
+            font-size: 9px;
+            color: rgba(0, 0, 0, 0.3);
+          }
+        }
+        .comment__delete {
+          button {
+            border: none;
+            background-color: inherit;
+            cursor: pointer;
+            color: red;
+            transition: all 0.4s linear foward;
+            &:hover {
+              font-size: 18px;
             }
           }
         }

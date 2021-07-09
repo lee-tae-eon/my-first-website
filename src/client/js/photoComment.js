@@ -2,8 +2,8 @@ const { default: fetch } = require("node-fetch");
 
 const photoContainer = document.getElementById("photoContainer");
 const photoForm = document.getElementById("photoCommentForm");
-const photoTextarea = photoForm.querySelector("textarea");
-const photoSubmitBtn = photoForm.querySelector("button");
+const photoTextarea = document.getElementById("photoTextarea");
+const photoSubmitBtn = document.getElementById("photoCommentButton");
 const photoCommentLists = document.getElementById("photoCommentList");
 const photoCommentDel = photoCommentLists.querySelectorAll("button");
 
@@ -52,6 +52,7 @@ const addComment = (text, photoCommentId) => {
 const handleCommentSubmit = async (event) => {
   event.preventDefault();
   const text = photoTextarea.value;
+  console.log(text);
   const photoId = photoContainer.dataset.id;
 
   if (text.trim() === "") {
@@ -86,7 +87,6 @@ const handleCommentDelete = async (event) => {
   if (confirm("Are you sure???") === true) {
     const comment = event.target.parentNode.parentNode;
     const commentId = comment.dataset.id;
-    console.log(commentId);
     const response = await fetch(`/api/comments/${commentId}/delete`, {
       method: "DELETE",
     });

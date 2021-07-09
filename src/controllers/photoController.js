@@ -17,17 +17,20 @@ export const postPhotoUpload = async (req, res) => {
     session: {
       user: { _id },
     },
-    file,
+    files,
     body: { title, description, hashtags },
   } = req;
-  console.log(file, title, description, hashtags);
+
   const isHeroku = process.env.NODE_ENV === "production";
 
+  const pfiles = files.map((file) => file.path);
+  let fileUrl = [...pfiles];
   try {
     const newPhoto = await Photo.create({
       title,
       description,
-      fileUrl: isHeroku ? file.location : file.path,
+      // fileUrl: isHeroku ? file.location : files.path,
+      fileUrl,
       owner: _id,
       hashtags: Photo.formatHashtags(hashtags),
     });

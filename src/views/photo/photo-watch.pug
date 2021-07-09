@@ -2,12 +2,17 @@ extends ../main/layout
 
 block content 
   div#photoContainer.photo-container(data-id=photo._id)
-    .photo-image
+    .photo-image#photoBox
+      span#rightBtn
+        i.fas.fa-arrow-right
+      span#leftBtn
+        i.fas.fa-arrow-left   
       if isHeroku 
         img(src=photo.fileUrl)
       else 
-        img(src="/" + photo.fileUrl)
-    
+        -for (let i = 0; i < photo.fileUrl.length; i++)      
+          div.photo--lists 
+            img(src="/" + photo.fileUrl[i]).photo--list  
     .photo__data 
       h2.photo__title=photo.title 
       .photo__hash 
@@ -21,26 +26,27 @@ block content
         a(href=`${photo.id}/edit`).edit__btn Edit Photo 
         br
         a(href=`${photo.id}/delete`).delete__btn Delete Photo 
-      if loggedIn 
-        .photo__add-comments 
-          form.photo__comment-form#photoCommentForm
-            textarea(placeholder="Write comment...", )
-            button Add Comment
+  if loggedIn 
+    .photo__add-comments 
+      form.photo__comment-form#photoCommentForm
+        textarea(placeholder="Write comment...", )#photoTextarea
+        button#photoCommentButton Add Comment
 
-          div.photo__comments
-            ul.photo__comments-list#photoCommentList
-              each comment in photo.comments.reverse()
-                li.photo__comment(data-id=comment._id)
-                  div.comment__content
-                    div.comment__text
-                      i.fas.fa-comment
-                      span  #{comment.text}  
-                    span.comment__date  #{comment.createdAt.toLocaleString("ko-KR")} 
-                  div.comment__delete
-                    if String(comment.owner) === String(loggedInUser._id)
-                      button 🗑
+      div.photo__comments
+        ul.photo__comments-list#photoCommentList
+          each comment in photo.comments.reverse()
+            li.photo__comment(data-id=comment._id)
+              div.comment__content
+                div.comment__text
+                  i.fas.fa-comment
+                  span  #{comment.text}  
+                span.comment__date  #{comment.createdAt.toLocaleString("ko-KR")} 
+              div.comment__delete
+                if String(comment.owner) === String(loggedInUser._id)
+                  button 🗑
 
 
-block scripts 
+block scripts
+ script(src="/static/js/photoWatch.js")
   if loggedIn 
     script(src="/static/js/photoComment.js")

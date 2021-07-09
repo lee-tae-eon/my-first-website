@@ -10,6 +10,7 @@
   row-gap: 3em;
   margin-bottom: 60px;
   grid-template-columns: repeat(4, minmax(180px, 1fr));
+  grid-template-rows: 400px repeat(auto-fill, 200px);
   .media-mixin:first-child,
   .media-mixin:nth-child(2) {
     grid-column: span 2;
@@ -30,13 +31,14 @@
 
 @media screen and (max-width: 890px) {
   .video-grid {
+    all: unset;
     display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     row-gap: 3em;
     height: 100%;
-    grid-template-columns: 1fr;
-    .video-mixin:first-child,
-    .video-mixin:nth-child(2) {
-      grid-column: span 1;
+    .media-mixin {
+      grid-column: span 2;
     }
   }
 }

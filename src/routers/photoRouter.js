@@ -18,7 +18,7 @@ photoRouter
   .route("/upload")
   .all(protectMiddleWare)
   .get(getPhotoUpload)
-  .post(photoUploadMiddleWare.single("photoFile"), postPhotoUpload);
+  .post(photoUploadMiddleWare.array("photoFile"), postPhotoUpload);
 photoRouter.get("/:id([0-9a-f]{24})", photoView);
 photoRouter
   .route("/:id([0-9a-f]{24})/edit")

@@ -6,7 +6,7 @@ block content
       span=errorMessage
     form(method="POST", enctype="multipart/form-data")
       label(for="photoFile") Photo File
-      input(name="photoFile", type="file", accept="image/*", required, id="photoFile")
+      input(name="photoFile", type="file", accept="image/*", multiple, required, id="photoFile")
       label(for="photoTitle") Photo Title
       input(name="title", type="text", placeholder="title", required, id="photoTitle"  minLength=3, maxLength=80 )
       label(for="photoText") Photo Description 
