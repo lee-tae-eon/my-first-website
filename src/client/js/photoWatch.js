@@ -3,23 +3,34 @@ const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
 const photoList = document.querySelectorAll(".photo--lists");
 
-console.log(photoList);
 if (photoList.length <= 1) {
-  leftBtn.remove();
   rightBtn.remove();
+  leftBtn.remove();
 }
-let photoLists = [...photoList];
 
-let currentImage = photoLists[0];
+let currentImage = 1;
 
-console.log(currentImage);
-
-const handleImageScroll = (event) => {
-  console.log(event);
-  for (let i = 0; i < photoLists.length; i++) {
-    currentImage = photoLists[i];
-    console.log(currentImage);
+const handlerightImage = (e) => {
+  if (currentImage === photoList.length) {
+    currentImage = 0;
   }
+  for (let i = 0; i < photoList.length; i++) {
+    photoList[i].style.display = "none";
+  }
+  photoList[currentImage].style.display = "flex";
+  currentImage++;
 };
 
-rightBtn.addEventListener("click", handleImageScroll);
+const handleleftImage = () => {
+  if (currentImage === 0) {
+    currentImage = photoList.length;
+  }
+  for (let i = 0; i < photoList.length; i++) {
+    photoList[i].style.display = "none";
+  }
+  currentImage--;
+  photoList[currentImage].style.display = "flex";
+};
+
+rightBtn.addEventListener("click", handlerightImage);
+leftBtn.addEventListener("click", handleleftImage);

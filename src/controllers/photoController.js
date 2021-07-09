@@ -56,6 +56,7 @@ export const photoView = async (req, res) => {
   if (!photo) {
     return res.render("404", { pageTitle: "Photo not found" });
   }
+  console.log(photo);
 
   return res.render("photo/photo-watch", { pageTitle: "Photo", photo });
 };

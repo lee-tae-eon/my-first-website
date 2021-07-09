@@ -4,7 +4,7 @@
   display: flex;
   .photo-image {
     position: relative;
-    max-width: 600px;
+    width: 600px;
     border: 1px solid rgba(255, 255, 255, 0.7);
     height: 600px;
     border-radius: 10px;
@@ -17,12 +17,12 @@
       padding: 10px;
       color: rgba(255, 255, 255, 0.7);
       background-color: rgba(255, 255, 255, 0.2);
-      &:first-child {
-        right: 5px;
-      }
-      &:nth-child(2) {
-        left: 5px;
-      }
+    }
+    #rightBtn {
+      right: 5px;
+    }
+    #leftBtn {
+      left: 5px;
     }
     .photo--lists {
       width: 100%;
