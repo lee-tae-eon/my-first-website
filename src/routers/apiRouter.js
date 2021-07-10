@@ -8,6 +8,7 @@ import {
   registerView,
   createComment,
   deleteComment,
+  videoThumbsUp,
 } from "../controllers/videoController";
 
 const apiRouter = express.Router();
@@ -20,5 +21,6 @@ apiRouter.post("/photos/:id([0-9a-f]{24})/comment", photoComment);
 apiRouter.delete("/comments/:id([0-9a-f]{24})/delete", photoCommentDelete);
 
 apiRouter.post("/photos/:id([0-9a-f]{24})/rating", photoThumbsUp);
+apiRouter.post("/videos/:id([0-9a-f]{24})/rating", videoThumbsUp);
 
 export default apiRouter;

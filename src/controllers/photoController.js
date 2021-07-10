@@ -204,13 +204,13 @@ export const photoThumbsUp = async (req, res) => {
   const photo = await Photo.findById(id);
 
   if (!photo) {
-    return sendStatus(404);
+    return res.sendStatus(404);
   }
 
   const user = await User.findById(_id);
 
   if (!user) {
-    return sendStatus(404);
+    return res.sendStatus(404);
   }
 
   const existingRating = await User.findOne({ ratingPhoto: id });

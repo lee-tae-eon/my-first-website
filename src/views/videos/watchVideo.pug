@@ -43,6 +43,10 @@ block content
                     br
                     a(href=`${video.id}/delete`).delete__btn Delete Video &rarr;
                 if loggedIn
+                    div.click__box#clickBox 
+                        button#thumbsUp
+                            i.fas.fa-thumbs-up
+                        span 좋아요 #{video.meta.rating}개
                     div.video__add-comments 
                         form.video__comment-form#commentForm
                             textarea(placeholder="Write comment...", )
@@ -74,4 +78,5 @@ block scripts
     script(src="/static/js/videoPlayer.js")
     if loggedIn
         script(src="/static/js/comment.js")
+        script(src="/static/js/ratingVideo.js")
     

@@ -275,3 +275,42 @@ export const deleteComment = async (req, res) => {
     return res.sendStatus(200);
   }
 };
+
+export const videoThumbsUp = async (req, res) => {
+  const {
+    params: { id },
+    session: {
+      user: { _id },
+    },
+  } = req;
+
+  const video = await Video.findById(id);
+
+  if (!video) {
+    return res.sendStatus(404);
+  }
+
+  const user = await User.findById(_id);
+
+  if (!user) {
+    return res.sendStatus(404);
+  }
+
+  const existingRating = await User.findOne({ ratingVideo: id });
+
+  if (existingRating) {
+    user.ratingVideo.remove(id);
+    await user.save();
+    video.meta.rating = video.meta.rating - 1;
+    await video.save();
+
+    return res.status(201).json({ ratingCount: video.meta.rating });
+  }
+
+  user.ratingVideo.push(id);
+  await user.save();
+  video.meta.rating = video.meta.rating + 1;
+  await video.save();
+
+  return res.status(201).json({ ratingCount: video.meta.rating });
+};
