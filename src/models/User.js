@@ -18,6 +18,7 @@ const userSchema = mongoose.Schema({
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
   photos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Photo" }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  ratingPhoto: [{ type: mongoose.Schema.Types.ObjectId, ref: "Photo" }],
 });
 
 // hashing password with middleware

@@ -15,6 +15,7 @@ module.exports = {
     photoComment: BASE_JS + "photoComment.js",
     homeAni: BASE_JS + "homeAni.js",
     photoWatch: BASE_JS + "photoWatch.js",
+    rating: BASE_JS + "rating.js",
   },
   mode: "development",
   plugins: [

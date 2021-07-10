@@ -82,6 +82,19 @@
       font-weight: 500;
       font-size: 25px;
     }
+    .click__box {
+      margin-top: 20px;
+      button {
+        all: unset;
+        padding: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 5px;
+        cursor: pointer;
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
   }
 }
 .photo__add-comments {

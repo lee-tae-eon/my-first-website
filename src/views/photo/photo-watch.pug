@@ -28,6 +28,13 @@ block content
         a(href=`${photo.id}/edit`).edit__btn Edit Photo 
         br
         a(href=`${photo.id}/delete`).delete__btn Delete Photo 
+      if loggedIn
+        div.click__box#clickBox 
+          button#thumbsUp
+            i.fas.fa-thumbs-up
+          span 좋아요 #{photo.meta.rating}개
+
+
   if loggedIn 
     .photo__add-comments 
       form.photo__comment-form#photoCommentForm
@@ -52,3 +59,4 @@ block scripts
   if loggedIn 
     script(src="/static/js/photoComment.js")
   script(src="/static/js/photoWatch.js")
+  script(src="/static/js/rating.js")

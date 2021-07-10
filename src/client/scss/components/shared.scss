@@ -30,13 +30,14 @@
 }
 
 @media screen and (max-width: 890px) {
-  .video-grid {
+  .video-grid,
+  .photo-grid {
     all: unset;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: repeat(auto-fit, 280px);
     row-gap: 3em;
-    height: 100%;
+    // height: 100%;
     .media-mixin {
       grid-column: span 2;
     }

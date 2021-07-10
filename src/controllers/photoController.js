@@ -192,3 +192,42 @@ export const photoCommentDelete = async (req, res) => {
     return res.sendStatus(200);
   }
 };
+
+export const photoThumbsUp = async (req, res) => {
+  const {
+    params: { id },
+    session: {
+      user: { _id },
+    },
+  } = req;
+
+  const photo = await Photo.findById(id);
+
+  if (!photo) {
+    return sendStatus(404);
+  }
+
+  const user = await User.findById(_id);
+
+  if (!user) {
+    return sendStatus(404);
+  }
+
+  const existingRating = await User.findOne({ ratingPhoto: id });
+
+  if (existingRating) {
+    user.ratingPhoto.remove(id);
+    await user.save();
+    photo.meta.rating = photo.meta.rating - 1;
+    await photo.save();
+
+    return res.status(201).json({ ratingCount: photo.meta.rating });
+  }
+
+  user.ratingPhoto.push(id);
+  await user.save();
+  photo.meta.rating = photo.meta.rating + 1;
+  await photo.save();
+
+  return res.status(201).json({ ratingCount: photo.meta.rating });
+};
