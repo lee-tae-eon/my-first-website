@@ -27,36 +27,30 @@ const paging = (page, totalPost) => {
 
 export const videoHome = async (req, res) => {
   const { page } = req.query;
-  console.log(req.query);
-
-  const totalVideo = await Video.countDocuments({});
-  console.log(totalVideo);
-
-  if (!totalVideo) {
-    return res.status(404).render("videos/video-home", { pageTitle: "Home" });
+  let videos;
+  const totalPost = await Video.countDocuments({});
+  if (!totalPost) {
+    videos = await Video.find({});
+    return res
+      .status(400)
+      .render("videos/video-home", { pageTitle: "Home", videos });
   }
+  let { startPage, endPage, hidePost, maxPost, totalPage, currentPage } =
+    paging(page, totalPost);
 
-  let { startPage, endPage, maxPost, hidePost, totalPage, currentPage } =
-    paging(page, totalVideo);
-
-  console.log(
-    `start:${startPage} - endPage:${endPage} - maxPost:${maxPost} - hidePost:${hidePost} - totalPage:${totalPage} - currentPage:${currentPage}`
-  );
-
-  const videos = await Video.find({})
+  videos = await Video.find({})
     .sort({ createdAt: "desc" })
     .skip(hidePost)
-    .limit(maxPost)
     .populate("owner");
 
   return res.render("videos/video-home", {
     pageTitle: "Home",
     videos,
     currentPage,
-    totalPage,
     startPage,
     endPage,
     maxPost,
+    totalPage,
   });
 };
 
@@ -298,19 +292,21 @@ export const videoThumbsUp = async (req, res) => {
 
   const existingRating = await User.findOne({ ratingVideo: id });
 
+  let ratingCount;
   if (existingRating) {
     user.ratingVideo.remove(id);
     await user.save();
-    video.meta.rating = video.meta.rating - 1;
+    video.meta.rating.remove(_id);
     await video.save();
-
-    return res.status(201).json({ ratingCount: video.meta.rating });
+    ratingCount = video.meta.rating.length;
+    return res.status(201).json({ ratingCount });
   }
 
   user.ratingVideo.push(id);
   await user.save();
-  video.meta.rating = video.meta.rating + 1;
+  video.meta.rating.push(_id);
   await video.save();
+  ratingCount = video.meta.rating.length;
 
-  return res.status(201).json({ ratingCount: video.meta.rating });
+  return res.status(201).json({ ratingCount });
 };

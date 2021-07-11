@@ -215,19 +215,26 @@ export const photoThumbsUp = async (req, res) => {
 
   const existingRating = await User.findOne({ ratingPhoto: id });
 
+  let ratingCount;
   if (existingRating) {
     user.ratingPhoto.remove(id);
     await user.save();
-    photo.meta.rating = photo.meta.rating - 1;
-    await photo.save();
 
-    return res.status(201).json({ ratingCount: photo.meta.rating });
+    photo.meta.rating.remove(_id);
+    await photo.save();
+    ratingCount = photo.meta.rating.length;
+    console.log(ratingCount);
+    return res.status(201).json({ ratingCount });
   }
 
   user.ratingPhoto.push(id);
   await user.save();
-  photo.meta.rating = photo.meta.rating + 1;
+  photo.meta.rating.push(_id);
   await photo.save();
 
-  return res.status(201).json({ ratingCount: photo.meta.rating });
+  ratingCount = photo.meta.rating.length;
+
+  console.log(ratingCount);
+
+  return res.status(201).json({ ratingCount });
 };
