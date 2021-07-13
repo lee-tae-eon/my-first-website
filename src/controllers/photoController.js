@@ -223,7 +223,7 @@ export const photoThumbsUp = async (req, res) => {
     photo.meta.rating.remove(_id);
     await photo.save();
     ratingCount = photo.meta.rating.length;
-    console.log(ratingCount);
+
     return res.status(201).json({ ratingCount });
   }
 
@@ -233,8 +233,6 @@ export const photoThumbsUp = async (req, res) => {
   await photo.save();
 
   ratingCount = photo.meta.rating.length;
-
-  console.log(ratingCount);
 
   return res.status(201).json({ ratingCount });
 };
