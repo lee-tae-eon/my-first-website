@@ -2,7 +2,7 @@ extends ../main/layout
 include ../mixins/photos
 
 block content
-  .photo-grid#photoGrid 
+  .photo-grid#photoGrid
     each photo in photos 
       +photo(photo)
     else 

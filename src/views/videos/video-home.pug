@@ -2,7 +2,7 @@ extends ../main/layout
 include ../mixins/videos
 
 block content
-  div.video-grid#videoGrid 
+  div.video-grid#videoGrid
     each video in videos
       +video(video)
     else 

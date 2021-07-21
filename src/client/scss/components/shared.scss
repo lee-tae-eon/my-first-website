@@ -9,12 +9,8 @@
   column-gap: 4em;
   row-gap: 3em;
   margin-bottom: 60px;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
-  grid-template-rows: 400px repeat(auto-fill, 200px);
-  .media-mixin:first-child,
-  .media-mixin:nth-child(2) {
-    grid-column: span 2;
-  }
+  grid-template-columns: repeat(4, 225px);
+  grid-template-rows: repeat(auto-fit, 180px);
 }
 .auth-switch {
   text-align: center;

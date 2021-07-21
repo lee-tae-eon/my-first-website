@@ -1,15 +1,28 @@
 extends ./main/layout
+include ./mixins/videos
+include ./mixins/photos
 
 block content 
   div#chooseSection.choose__section
-    div.home-video__back#homevideoRoute
-      a(href="/videos")
-        img(src="https://cdn.pixabay.com/photo/2014/06/04/08/10/projector-361784_1280.jpg")
-    div.home-photo__back#homephotoRoute
-      a(href="/photos")
-        img(src="https://cdn.pixabay.com/photo/2017/03/24/07/28/instagram-2170420_1280.png")
+    section.home__section-video
+      div.section--title
+        a(href="/videos")
+          h1 Video Router
+      .video-grid#videoGrid.home-video-grid      
+        each video in videos
+          +video(video)
+        else 
+          span.empty__msg 비디오를 찾지 못했습니다.
+    section.home__section-photo
+      div.section--title
+        a(href="/photos")
+          h1 Photo Router
+      .photo-grid#photoGrid.home-photo-grid 
+        each photo in photos 
+          +photo(photo)
+        else 
+          span.empty__msg 사진이 없습니다~
 
-  h1 Choice Media
 
 block scripts 
-  script(src="/static/js/homeAni.js")
+  script(src="/static/js/videoPreview.js")
