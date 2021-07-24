@@ -10,7 +10,7 @@ import qs from "qs";
 // const heroku_redirect_uri = "http://gyumtube.herokuapp.com/users/kakao/callback";
 
 // 회원가입 -------
-export const getJoin = (req, res) => res.render("Join", { pageTitle: "Join" });
+export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 
 export const postJoin = async (req, res) => {
   const { name, email, username, password1, password2, location } = req.body;
