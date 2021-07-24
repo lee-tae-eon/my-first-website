@@ -1,13 +1,12 @@
 mixin photo(photo)
-  div.media-mixin
-    a(href=`/photos/${photo.id}`) 
-      div.media-mixin__thumb 
-        if isHeroku 
-          img.thumb__media(src=photo.fileUrl[0])
-        else 
-          img.thumb__media(src="/" + photo.fileUrl[0])
-      div.meida-mixin__data 
-        span.media-mixin__title=photo.title 
-        div.media-mixin__meta 
-          span #{photo.owner.name}
-          span #{photo.meta.views} 회
+  a(href=`/photos/${photo.id}`).media-mixin
+    div.media-mixin__thumb 
+      if isHeroku 
+        img.thumb__media(src=photo.fileUrl[0])
+      else 
+        img.thumb__media(src="/" + photo.fileUrl[0])
+    div.media-mixin__data 
+      span.media-mixin__title=photo.title 
+      div.media-mixin__meta 
+        span #{photo.owner.name}
+        span #{photo.meta.views} 회
