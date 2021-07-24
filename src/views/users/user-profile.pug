@@ -4,8 +4,8 @@ include ../mixins/photos
 
 block content
   div.profile__data
-    if user.avatarUrl == null 
-      img(src="../../noImage/noImage.png")
+    if user.avatarUrl == undefined
+      img(src="src/images/noImage.png")
     else 
       if isHeroku 
         img(src=user.avatarUrl).avatar

@@ -9,7 +9,7 @@
   column-gap: 4em;
   row-gap: 3em;
   margin-bottom: 60px;
-  grid-template-columns: repeat(4, 225px);
+  grid-template-columns: repeat(4, 240px);
   grid-template-rows: repeat(auto-fit, 180px);
 }
 .auth-switch {
@@ -25,13 +25,14 @@
   border-radius: 50%;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 1160px) {
   .video-grid,
   .photo-grid {
     all: unset;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fit, 280px);
+    grid-template-rows: repeat(auto-fit, 400px);
+    padding: 0 20px;
     row-gap: 3em;
     // height: 100%;
     .media-mixin {

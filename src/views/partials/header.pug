@@ -18,7 +18,9 @@ header
               if isHeroku
                 img(src=loggedInUser.avatarUrl).burger__avatar
               else
-                if loggedInUser.avatarUrl.includes("github") || loggedInUser.avatarUrl.includes("kakao")
+                //- if loggedInUser.avatarUrl.includes("github") || loggedInUser.avatarUrl.includes("kakao")
+                  img(src=loggedInUser.avatarUrl).burger__avatar
+                if loggedInUser.socialLogin === true
                   img(src=loggedInUser.avatarUrl).burger__avatar
                 else
                   img(src="/" + loggedInUser.avatarUrl).burger__avatar 
@@ -54,13 +56,15 @@ header
           a(href="/users/logout") Log Out
         li.header-profile 
           a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl === null
+            if loggedInUser.avatarUrl === undefined
               span 🤪  #{loggedInUser.name}'s Profile  
             else 
               if isHeroku
                 img(src=loggedInUser.avatarUrl).header__avatar
               else
-                if loggedInUser.avatarUrl.includes("github") || loggedInUser.avatarUrl.includes("kakao")
+                //- if loggedInUser.avatarUrl.includes("github") || loggedInUser.avatarUrl.includes("kakao")
+                  img(src=loggedInUser.avatarUrl).header__avatar
+                if loggedInUser.socialLogin === true
                   img(src=loggedInUser.avatarUrl).header__avatar
                 else
                   img(src="/" + loggedInUser.avatarUrl).header__avatar 
