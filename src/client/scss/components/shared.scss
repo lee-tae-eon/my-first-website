@@ -28,10 +28,10 @@
 @media screen and (max-width: 1160px) {
   .video-grid,
   .photo-grid {
-    all: unset;
+    // all: unset;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fit, 400px);
+    grid-template-rows: repeat(2, 400px);
     padding: 0 20px;
     row-gap: 3em;
     // height: 100%;

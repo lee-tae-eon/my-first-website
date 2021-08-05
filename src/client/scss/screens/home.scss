@@ -23,8 +23,6 @@
 
 @media screen and (max-width: 1160px) {
   .choose__section .home__section-video .home-video-grid,
-  .choose__section .home__section-video .home-photo-grid,
-  .choose__section .home__section-photo .home-video-grid,
   .choose__section .home__section-photo .home-photo-grid {
     display: grid;
     grid-template-columns: 1fr;

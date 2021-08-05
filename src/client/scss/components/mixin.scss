@@ -18,9 +18,9 @@
       width: 100%;
       height: 100%;
     }
-    img.thumb__media {
+    img {
       width: 100%;
-      max-height: 100%;
+      height: 100%;
     }
   }
   .media-mixin__data {
@@ -38,5 +38,13 @@
       display: flex;
       justify-content: space-between;
     }
+  }
+}
+@media screen and (max-width: 1160px) {
+  .media-mixin {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
   }
 }
