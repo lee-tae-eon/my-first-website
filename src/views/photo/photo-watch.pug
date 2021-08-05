@@ -22,7 +22,7 @@ block content
           span=hash 
       p.photo__description=photo.description 
       small.photo__owner Uploaded by 
-        a(href=`users/${photo.owner._id}`)=photo.owner.name 
+        a(href=`/users/${photo.owner._id}`)=photo.owner.name 
       small.photo__createdAt=new Date(photo.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
       if String(photo.owner._id) === String(loggedInUser._id)
         a(href=`${photo.id}/edit`).edit__btn Edit Photo 
