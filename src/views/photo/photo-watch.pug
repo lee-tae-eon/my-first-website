@@ -28,31 +28,32 @@ block content
         a(href=`${photo.id}/edit`).edit__btn Edit Photo 
         br
         a(href=`${photo.id}/delete`).delete__btn Delete Photo 
-      if loggedIn
-        div.click__box#clickBox 
+      
+      div.click__box#clickBox 
+        if loggedIn
           button#thumbsUp
             i.fas.fa-thumbs-up
-          span 좋아요 #{photo.meta.rating.length}개
+        span 좋아요 #{photo.meta.rating.length}개
 
 
-  if loggedIn 
+  if loggedIn
     .photo__add-comments 
       form.photo__comment-form#photoCommentForm
         textarea(placeholder="Write comment...", )
         button Add Comment
 
-      div.photo__comments
-        ul.photo__comments-list#photoCommentList
-          each comment in photo.comments.reverse()
-            li.photo__comment(data-id=comment._id)
-              div.comment__content
-                div.comment__text
-                  i.fas.fa-comment
-                  span  #{comment.text}  
-                span.comment__date  #{comment.createdAt.toLocaleString("ko-KR")} 
-              div.comment__delete
-                if String(comment.owner) === String(loggedInUser._id)
-                  button 🗑
+  div.photo__comments
+    ul.photo__comments-list#photoCommentList
+      each comment in photo.comments.reverse()
+        li.photo__comment(data-id=comment._id)
+          div.comment__content
+            div.comment__text
+              i.fas.fa-comment
+              span  #{comment.text}  
+            span.comment__date  #{comment.createdAt.toLocaleString("ko-KR")} 
+          div.comment__delete
+            if String(comment.owner) === String(loggedInUser._id)
+              button 🗑
 
 
 block scripts

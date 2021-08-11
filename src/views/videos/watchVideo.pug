@@ -42,11 +42,13 @@ block content
                     a(href=`${video.id}/edit`).edit__btn Edit Video &rarr;
                     br
                     a(href=`${video.id}/delete`).delete__btn Delete Video &rarr;
-                if loggedIn
-                    div.click__box#clickBox 
+        
+                div.click__box#clickBox 
+                    if loggedIn
                         button#thumbsUp
                             i.fas.fa-thumbs-up
-                        span 좋아요 #{video.meta.rating.length}개
+                    span 좋아요 #{video.meta.rating.length}개
+                if loggedIn
                     div.video__add-comments 
                         form.video__comment-form#commentForm
                             textarea(placeholder="Write comment...", )
